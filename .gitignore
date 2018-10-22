@@ -14,3 +14,6 @@ zconf.h.included
 *.TMP
 logs
 Thumbs.db
+demo/bin/x11/*
+demo/bin/windows/*
+demo/bin/osx/*
