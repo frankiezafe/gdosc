@@ -1,5 +1,4 @@
-# gdnative example
-
+# gdnative template
 
 ## no headache process
 
