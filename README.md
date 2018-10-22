@@ -55,8 +55,3 @@ scons will use gcc by default on linux, if you use the "use_llvm=yes" flag for c
 
 * http://docs.godotengine.org/en/3.0/tutorials/plugins/gdnative/gdnative-cpp-example.html
 * https://github.com/BastiaanOlij/gdnative_cpp_example/
-
-
-// git clone https://github.com/GodotNativeTools/godot-cpp &&
-// git clone https://github.com/GodotNativeTools/godot_headers && git submodule init && git submodule update
-// wget http://docs.godotengine.org/en/3.0/_downloads/SConstruct SConstruct
