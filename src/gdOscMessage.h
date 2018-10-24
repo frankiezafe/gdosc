@@ -6,12 +6,14 @@
 #include <iostream>
 #include <vector>
 
-#include "Reference.hpp"
-#include "String.hpp"
+#include <Godot.hpp>
+#include <Reference.hpp>
+#include <String.hpp>
 
-#include "gdOscArg.h"
+#include <utils.h>
+#include <gdOscArg.h>
 
-namespace godot {
+namespace gdosc {
 
 	class gdOscMessage {
 	
@@ -35,7 +37,7 @@ namespace godot {
 
 		void addIntArg(int32_t arg);
 		void addFloatArg(float arg);
-		void addStringArg(String arg);
+		void addStringArg(godot::String arg);
 
 		int32_t getArgAsInt32(int index, bool typeConvert = false) const;
 		float getArgAsFloat(int index, bool typeConvert = false) const;

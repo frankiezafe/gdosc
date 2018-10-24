@@ -10,25 +10,32 @@
 #include <mutex>
 #include <thread>
 
-#include "Engine.hpp"
-#include "Node.hpp"
+#include <Godot.hpp>
+#include <ClassDB.hpp>
+#include <Engine.hpp>
+#include <Node.hpp>
+#include <MainLoop.hpp>
 
-#include "gdOscMessage.h"
-#include "OscOutboundPacketStream.h"
+#include <utils.h>
+#include <gdOscMessage.h>
+#include <OscOutboundPacketStream.h>
 
-namespace godot {
+namespace gdosc {
 	
 	class OSCsender : public godot::Node {
-		GODOT_SUBCLASS(OSCsender, godot::Node)
-		//GODOT_CLASS(OSCsender);
+		//GODOT_SUBCLASS(OSCsender, godot::Node)
+		GODOT_CLASS(OSCsender)
 		//GDCLASS(OSCsender, Node);
 
 		public:
 		
 			OSCsender();
 			~OSCsender();
+		
+			//gdnative mandatory
+			static void _register_methods();
 
-			bool init(String ip, int port);
+			bool init(godot::String ip, int port);
 
 			bool start();
 			void stop();
@@ -36,14 +43,14 @@ namespace godot {
 			// message related
 
 			// construction of the message
-			void msg_address(const String& address);
+			void msg_address(const godot::String& address);
 			void msg_add_int(const int& i);
 			void msg_add_real(const real_t& r);
-			void msg_add_string(const String& s);
-			void msg_add_v2(const Vector2& v);
-			void msg_add_v3(const Vector3& v);
-			void msg_add_quat(const Quat& q);
-			void msg_add_transform(const Transform& t);
+			void msg_add_string(const godot::String& s);
+			void msg_add_v2(const godot::Vector2& v);
+			void msg_add_v3(const godot::Vector3& v);
+			void msg_add_quat(const godot::Quat& q);
+			void msg_add_transform(const godot::Transform& t);
 
 			// send the message
 			void msg_send();
@@ -54,29 +61,31 @@ namespace godot {
 			void msg_clear();
 
 			// setters
-			void set_ip(String ip);
+			void set_ip(godot::String ip);
 			void set_port(int port);
 			void set_buffersize(int buffersize);
 			void set_autostart(bool autostart);
 			void set_autoclear(bool autoclear);
 
 			// getters
-			inline const String& get_ip() const { return _ip; }
-			inline const int& get_port() const { return _port; }
-			inline const int& get_buffersize() const { return _buffersize; }
-			inline const bool& is_autostart() const { return _autostart; }
-			inline const bool& is_autoclear() const { return _autoclear; }
-			inline const bool& is_ready() const { return _ready; }
-			inline const bool& is_started() const { return _started; }
+			const godot::String& get_ip() const { return _ip; }
+			const int& get_port() const { return _port; }
+			const int& get_buffersize() const { return _buffersize; }
+			const bool& is_autostart() const { return _autostart; }
+			const bool& is_autoclear() const { return _autoclear; }
+			const bool& is_ready() const { return _ready; }
+			const bool& is_started() const { return _started; }
 
 		protected:
 		
 			void _notification(int p_what);
-			static void _bind_methods();
-
+			
+			// use this when compiling in the engine directly
+			//static void _bind_methods();
+			
 		private:
 		
-			String _ip;
+			godot::String _ip;
 			int _port;
 			int _buffersize;
 			bool _autostart;

@@ -1,6 +1,7 @@
 #include "OSCreceiver.h"
 
 using namespace godot;
+using namespace gdosc;
 
 OSCreceiver::OSCreceiver()
     : _lsocket(0),
@@ -225,32 +226,57 @@ void OSCreceiver::_notification(int p_what) {
   // std::cout << p_what << std::endl;
 }
 
-void OSCreceiver::_bind_methods() {
+void OSCreceiver::_register_methods() {
+	
+	//register_property((char *)"base/name", &OSCreceiver::_name, String("OSCreceiver"));
+	
+	register_method((char *)"init", &OSCreceiver::init);
+	register_method((char *)"start", &OSCreceiver::start);
+	register_method((char *)"stop", &OSCreceiver::stop);
+	register_method((char *)"set_max_queue", &OSCreceiver::set_max_queue);
+	register_method((char *)"set_autostart", &OSCreceiver::set_autostart);
+	register_method((char *)"set_emit_signal", &OSCreceiver::set_emit_signal);
+	register_method((char *)"get_port", &OSCreceiver::get_port);
+	register_method((char *)"get_max_queue", &OSCreceiver::get_max_queue);
+	register_method((char *)"is_autostart", &OSCreceiver::is_autostart);
+	register_method((char *)"is_emit_signal", &OSCreceiver::is_emit_signal);
+	register_method((char *)"has_waiting_messages", &OSCreceiver::has_waiting_messages);
+	register_method((char *)"get_next_message", &OSCreceiver::get_next_message);
+	/*
+	register_method((bool)"init", &OSCreceiver::init);
+	register_method((bool)"start", &OSCreceiver::start);
+	register_method((void)"stop", &OSCreceiver::stop);
+	register_method((void)"set_max_queue", &OSCreceiver::set_max_queue);
+	register_method((void)"set_autostart", &OSCreceiver::set_autostart);
+	register_method((void)"set_emit_signal", &OSCreceiver::set_emit_signal);
+	register_method((const int&)"get_port", &OSCreceiver::get_port);
+	register_method((int)"get_max_queue", &OSCreceiver::get_max_queue);
+	register_method((const bool&)"is_autostart", &OSCreceiver::is_autostart);
+	register_method((const bool&)"is_emit_signal", &OSCreceiver::is_emit_signal);
+	register_method((bool)"has_waiting_messages", &OSCreceiver::has_waiting_messages);
+	register_method((Ref<OSCmessage>)"get_next_message", &OSCreceiver::get_next_message);
+	*/
+}
 
 /*
-  ClassDB::bind_method(D_METHOD("init", "port"), &OSCreceiver::init);
-  ClassDB::bind_method(D_METHOD("start"), &OSCreceiver::start);
-  ClassDB::bind_method(D_METHOD("stop"), &OSCreceiver::stop);
-  ClassDB::bind_method(D_METHOD("set_max_queue", "max_queue"), &OSCreceiver::set_max_queue);
-  ClassDB::bind_method(D_METHOD("set_autostart", "autostart"), &OSCreceiver::set_autostart);
-  ClassDB::bind_method(D_METHOD("set_emit_signal", "emit_signal"), &OSCreceiver::set_emit_signal);
-  ClassDB::bind_method(D_METHOD("get_port"), &OSCreceiver::get_port);
-  ClassDB::bind_method(D_METHOD("get_max_queue"), &OSCreceiver::get_max_queue);
-  ClassDB::bind_method(D_METHOD("is_autostart"), &OSCreceiver::is_autostart);
-  ClassDB::bind_method(D_METHOD("is_emit_signal"), &OSCreceiver::is_emit_signal);
-  ClassDB::bind_method(D_METHOD("has_waiting_messages"), &OSCreceiver::has_waiting_messages);
-  ClassDB::bind_method(D_METHOD("get_next_message"), &OSCreceiver::get_next_message);
-
-  ADD_SIGNAL(MethodInfo("osc_message_received"));
-
-  ADD_GROUP("Network", "");
-  ADD_PROPERTY(
-      PropertyInfo(Variant::INT, "port", PROPERTY_HINT_RANGE, "1,99999,1"), "init", "get_port");
-  ADD_PROPERTY(PropertyInfo(Variant::INT, "max_queue", PROPERTY_HINT_RANGE, "1,1024,1"),
-               "set_max_queue",
-               "get_max_queue");
-  ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autostart"), "set_autostart", "is_autostart");
-  ADD_PROPERTY(PropertyInfo(Variant::BOOL, "emit_signal"), "set_emit_signal", "is_emit_signal");
-*/
-
+void OSCreceiver::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("init", "port"), &OSCreceiver::init);
+	ClassDB::bind_method(D_METHOD("start"), &OSCreceiver::start);
+	ClassDB::bind_method(D_METHOD("stop"), &OSCreceiver::stop);
+	ClassDB::bind_method(D_METHOD("set_max_queue", "max_queue"), &OSCreceiver::set_max_queue);
+	ClassDB::bind_method(D_METHOD("set_autostart", "autostart"), &OSCreceiver::set_autostart);
+	ClassDB::bind_method(D_METHOD("set_emit_signal", "emit_signal"), &OSCreceiver::set_emit_signal);
+	ClassDB::bind_method(D_METHOD("get_port"), &OSCreceiver::get_port);
+	ClassDB::bind_method(D_METHOD("get_max_queue"), &OSCreceiver::get_max_queue);
+	ClassDB::bind_method(D_METHOD("is_autostart"), &OSCreceiver::is_autostart);
+	ClassDB::bind_method(D_METHOD("is_emit_signal"), &OSCreceiver::is_emit_signal);
+	ClassDB::bind_method(D_METHOD("has_waiting_messages"), &OSCreceiver::has_waiting_messages);
+	ClassDB::bind_method(D_METHOD("get_next_message"), &OSCreceiver::get_next_message);
+	ADD_SIGNAL(MethodInfo("osc_message_received"));
+	ADD_GROUP("Network", "");
+	ADD_PROPERTY( PropertyInfo(Variant::INT, "port", PROPERTY_HINT_RANGE, "1,99999,1"), "init", "get_port");
+	ADD_PROPERTY(PropertyInfo(Variant::INT, "max_queue", PROPERTY_HINT_RANGE, "1,1024,1"), "set_max_queue", "get_max_queue");
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autostart"), "set_autostart", "is_autostart");
+	ADD_PROPERTY(PropertyInfo(Variant::BOOL, "emit_signal"), "set_emit_signal", "is_emit_signal");
 }
+*/

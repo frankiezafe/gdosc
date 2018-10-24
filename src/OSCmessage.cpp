@@ -1,6 +1,7 @@
 #include "OSCmessage.h"
 
 using namespace godot;
+using namespace gdosc;
 
 OSCmessage::OSCmessage() : _port(0), _valid(false) {}
 
@@ -48,6 +49,29 @@ void OSCmessage::copy(const OSCmessage& src) {
   _arguments = src.arguments();
 }
 
+void OSCmessage::_register_methods() {
+	
+	//register_property((char *)"base/name", &OSCmessage::_name, String("OSCmessage"));
+	
+	register_method((char *)"empty", &OSCmessage::empty);
+	register_method((char *)"ip", &OSCmessage::ip);
+	register_method((char *)"port", &OSCmessage::port);
+	register_method((char *)"address", &OSCmessage::address);
+	register_method((char *)"typetag", &OSCmessage::typetag);
+	register_method((char *)"arg_num", &OSCmessage::arg_num);
+	register_method((char *)"arg", &OSCmessage::arg);
+	/*
+	register_method((bool)"empty", &OSCmessage::empty);
+	register_method((const String&)"ip", &OSCmessage::ip);
+	register_method((const int&)"port", &OSCmessage::port);
+	register_method((const String&)"address", &OSCmessage::address);
+	register_method((const String&)"typetag", &OSCmessage::typetag);
+	register_method((const int&)"arg_num", &OSCmessage::arg_num);
+	register_method((const Variant&)"arg", &OSCmessage::arg);
+	*/
+}
+
+/*
 void OSCmessage::_bind_methods() {
   ClassDB::bind_method(D_METHOD("empty"), &OSCmessage::empty);
   ClassDB::bind_method(D_METHOD("ip"), &OSCmessage::ip);
@@ -57,3 +81,4 @@ void OSCmessage::_bind_methods() {
   ClassDB::bind_method(D_METHOD("arg_num"), &OSCmessage::arg_num);
   ClassDB::bind_method(D_METHOD("arg", "p_idx"), &OSCmessage::arg);
 }
+*/

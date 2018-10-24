@@ -9,31 +9,36 @@
 #include <mutex>
 #include <thread>
 
-#include "Ref.hpp"
-#include "Engine.hpp"
-#include "Object.hpp"
-#include "MainLoop.hpp"
-#include "Node.hpp"
+#include <Godot.hpp>
+#include <ClassDB.hpp>
+#include <Ref.hpp>
+#include <Engine.hpp>
+#include <Object.hpp>
+#include <MainLoop.hpp>
+#include <Node.hpp>
 
-#include "gdOscMessage.h"
-#include "PacketListener.h"
-#include "UdpSocket.h"
-#include "OscPacketListener.h"
-#include "OscPrintReceivedElements.h"
-#include "OscReceivedElements.h"
-#include "OSCmessage.h"
+#include <gdOscMessage.h>
+#include <PacketListener.h>
+#include <UdpSocket.h>
+#include <OscPacketListener.h>
+#include <OscPrintReceivedElements.h>
+#include <OscReceivedElements.h>
+#include <OSCmessage.h>
 
-namespace godot {
+namespace gdosc {
 	
 	class OSCreceiver : public godot::Node, public osc::OscPacketListener {
-		GODOT_SUBCLASS(OSCreceiver, godot::Node)
-		//GODOT_CLASS(OSCreceiver)
+		//GODOT_SUBCLASS(OSCreceiver, godot::Node)
+		GODOT_CLASS(OSCreceiver)
 		//GDCLASS(OSCreceiver, Node);
 
 	public:
 		
 		OSCreceiver();
 		~OSCreceiver();
+		
+		//gdnative mandatory
+		static void _register_methods();
 
 		/* Set native mode to true to prevent the object to turn OSC messages to gd Dicitionaries.
 		* If set to true, use method getNextMessage( gdOscMessage& msg ) to retrieve messages.
@@ -46,7 +51,7 @@ namespace godot {
 		void stop();
 
 		bool has_waiting_messages();
-		Ref<OSCmessage> get_next_message();
+		godot::Ref<OSCmessage> get_next_message();
 
 		/* USe this method to retrieve messages in C++. It is not exposed in gdscript, and
 		* will return false if native_mode is not set to true.
@@ -59,16 +64,18 @@ namespace godot {
 		void set_emit_signal(bool emit_signal);
 
 		// getters
-		inline const int& get_port() const { return _port; }
-		inline int get_max_queue() const { return (int)_max_queue; }
-		inline const bool& is_autostart() const { return _autostart; }
-		inline const bool& is_emit_signal() const { return _emit_signal; }
+		const int& get_port() const { return _port; }
+		int get_max_queue() const { return (int)_max_queue; }
+		const bool& is_autostart() const { return _autostart; }
+		const bool& is_emit_signal() const { return _emit_signal; }
 
 	protected:
 		
 		void ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint);
 		void _notification(int p_what);
-		static void _bind_methods();
+		
+		// use this when compiling in the engine directly
+		//static void _bind_methods();
 
 	private:
 		
@@ -87,7 +94,7 @@ namespace godot {
 		std::deque<OSCmessage>* _gd_queue_write;
 		std::deque<OSCmessage>* _gd_queue_read;
 
-		Ref<OSCmessage> _gd_next_msg;
+		godot::Ref<OSCmessage> _gd_next_msg;
 
 		void create_buffers();
 		void purge_buffers();

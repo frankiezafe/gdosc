@@ -3,17 +3,19 @@
 
 #include <iostream>
 
-#include "Array.hpp"
-#include "Resource.hpp"
+#include <Godot.hpp>
+#include <ClassDB.hpp>
+#include <Array.hpp>
+#include <Resource.hpp>
 
-#include "IpEndpointName.h"
-#include "OscReceivedElements.h"
+#include <IpEndpointName.h>
+#include <OscReceivedElements.h>
 
-namespace godot {
+namespace gdosc {
 
 	class OSCmessage : public godot::Resource {
-		GODOT_SUBCLASS(OSCmessage, godot::Resource);
-		//GODOT_CLASS(OSCmessage);
+		//GODOT_SUBCLASS(OSCmessage, godot::Resource)
+		GODOT_CLASS(OSCmessage)
 		//GDCLASS(OSCmessage, Resource);
 		//RES_BASE_EXTENSION("oscmessage");
 	
@@ -23,35 +25,40 @@ namespace godot {
 		OSCmessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint);
 		~OSCmessage();
 		
+		//gdnative mandatory
+		static void _register_methods();
+		
 		// getter
-		inline const bool& is_valid() const { return _valid; }
+		const bool& is_valid() const { return _valid; }
 		
 		// getter, exposed in gdscript
-		inline bool empty() const { return _arg_num < 1; }
-		inline const String& ip() const { return _ip; }
-		inline const int& port() const { return _port; }
-		inline const String& address() const { return _address; }
-		inline const String& typetag() const { return _typetag; }
-		inline const int& arg_num() const { return _arg_num; }
-		inline const Variant& arg(int p_idx) const { return _arguments[p_idx]; }
+		bool empty() const { return _arg_num < 1; }
+		const godot::String& ip() const { return _ip; }
+		const int& port() const { return _port; }
+		const godot::String& address() const { return _address; }
+		const godot::String& typetag() const { return _typetag; }
+		const int& arg_num() const { return _arg_num; }
+		const godot::Variant& arg(int p_idx) const { return _arguments[p_idx]; }
 		
 		// operators
 		void copy(const OSCmessage& src);
 	
 	protected:
 		
-		static void _bind_methods();
-		const Array& arguments() const { return _arguments; }
+		// use this when compiling in the engine directly
+		//static void _bind_methods();
+		
+		const godot::Array& arguments() const { return _arguments; }
 	
 	private:
 		
 		bool _valid;
-		String _ip;
+		godot::String _ip;
 		int _port;
-		String _address;
-		String _typetag;
+		godot::String _address;
+		godot::String _typetag;
 		int _arg_num;
-		Array _arguments;
+		godot::Array _arguments;
 		
 	};
 

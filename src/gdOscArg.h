@@ -3,7 +3,7 @@
 
 #include <string>
 
-namespace godot {
+namespace gdosc {
 	
 	typedef enum _gdOscArgType { TYPE_NONE, TYPE_INT32, TYPE_FLOAT, TYPE_STRING } gdOscArgType;
 
