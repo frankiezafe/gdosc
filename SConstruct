@@ -49,5 +49,5 @@ env.Append(LIBS=["godot-cpp" + "." + platform + "." + str(bits)])
 sources = []
 add_sources(sources, "src")
 
-library = env.SharedLibrary(target=final_lib_path + 'libgdexample', source=sources)
+library = env.SharedLibrary(target=final_lib_path + 'libgdosc', source=sources)
 Default(library)
