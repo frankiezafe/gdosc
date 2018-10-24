@@ -1,0 +1,10 @@
+[gd_resource type="Node" load_steps=2 format=2]
+
+[ext_resource path="res://bin/gdosc.gdnlib" type="GDNativeLibrary" id=1]
+
+[resource]
+
+resource_name = "OSCreceiver"
+class_name = "osc_receiver"
+library = ExtResource( 1 )
+_sections_unfolded = [ "Resource" ]
