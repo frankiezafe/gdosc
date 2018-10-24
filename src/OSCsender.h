@@ -23,8 +23,8 @@
 namespace gdosc {
 	
 	class OSCsender : public godot::Node {
-		//GODOT_SUBCLASS(OSCsender, godot::Node)
-		GODOT_CLASS(OSCsender)
+		GODOT_SUBCLASS(OSCsender, godot::Node)
+		//GODOT_CLASS(OSCsender)
 		//GDCLASS(OSCsender, Node);
 
 		public:
@@ -34,8 +34,9 @@ namespace gdosc {
 		
 			//gdnative mandatory
 			static void _register_methods();
-
-			bool init(godot::String ip, int port);
+			
+			//gdnative mandatory for node
+			godot::Object* owner;
 
 			bool start();
 			void stop();
@@ -83,8 +84,10 @@ namespace gdosc {
 			// use this when compiling in the engine directly
 			//static void _bind_methods();
 			
+			bool init_osc(godot::String ip, int port);
+			
 		private:
-		
+			
 			godot::String _ip;
 			int _port;
 			int _buffersize;

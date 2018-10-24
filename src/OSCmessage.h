@@ -14,8 +14,8 @@
 namespace gdosc {
 
 	class OSCmessage : public godot::Resource {
-		//GODOT_SUBCLASS(OSCmessage, godot::Resource)
-		GODOT_CLASS(OSCmessage)
+		GODOT_SUBCLASS(OSCmessage, godot::Resource)
+		//GODOT_CLASS(OSCmessage)
 		//GDCLASS(OSCmessage, Resource);
 		//RES_BASE_EXTENSION("oscmessage");
 	
@@ -27,6 +27,9 @@ namespace gdosc {
 		
 		//gdnative mandatory
 		static void _register_methods();
+		
+		//gdnative mandatory for node
+		godot::Object* owner;
 		
 		// getter
 		const bool& is_valid() const { return _valid; }

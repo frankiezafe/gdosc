@@ -28,8 +28,8 @@
 namespace gdosc {
 	
 	class OSCreceiver : public godot::Node, public osc::OscPacketListener {
-		//GODOT_SUBCLASS(OSCreceiver, godot::Node)
-		GODOT_CLASS(OSCreceiver)
+		GODOT_SUBCLASS(OSCreceiver, godot::Node)
+		//GODOT_CLASS(OSCreceiver)
 		//GDCLASS(OSCreceiver, Node);
 
 	public:
@@ -39,6 +39,9 @@ namespace gdosc {
 		
 		//gdnative mandatory
 		static void _register_methods();
+		
+		//gdnative mandatory for node
+		godot::Object* owner;
 
 		/* Set native mode to true to prevent the object to turn OSC messages to gd Dicitionaries.
 		* If set to true, use method getNextMessage( gdOscMessage& msg ) to retrieve messages.
@@ -46,7 +49,6 @@ namespace gdosc {
 		*/
 		void native_mode(bool enable);
 
-		bool init(int port);
 		bool start();
 		void stop();
 
@@ -59,6 +61,7 @@ namespace gdosc {
 		bool getNextMessage(gdOscMessage& msg);
 
 		// setters
+		bool set_port(int port);
 		void set_max_queue(int max_queue);
 		void set_autostart(bool autostart);
 		void set_emit_signal(bool emit_signal);

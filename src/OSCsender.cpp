@@ -14,7 +14,7 @@ OSCsender::OSCsender()
 
 OSCsender::~OSCsender() { stop(); }
 
-bool OSCsender::init(String ip, int port) {
+bool OSCsender::init_osc(String ip, int port) {
   stop();
 
   _ip = ip;
@@ -174,10 +174,12 @@ void OSCsender::_notification(int p_what) {
   // std::cout << p_what << std::endl;
 }
 
-void OSCsender::set_ip(String ip) { init(ip, _port); }
+void OSCsender::set_ip(String ip) { 
+	init_osc(ip, _port);
+}
 
 void OSCsender::set_port(int port) {
-  init(_ip, port);
+  init_osc(_ip, port);
   std::cout << "Setting port: " << port << std::endl;
 }
 
@@ -193,90 +195,91 @@ void OSCsender::set_autoclear(bool autoclear) { _autoclear = autoclear; }
 
 void OSCsender::_register_methods() {
 	
-	//register_property((char *)"base/name", &OSCsender::_name, String("OSCsender"));
+	//register_property((char *)"base/name", &gdosc::OSCsender::_name, String("OSCsender"));
 	
-	register_method((char *)"init", &OSCsender::init);
-	register_method((char *)"start", &OSCsender::start);
-	register_method((char *)"stop", &OSCsender::stop);
-	register_method((char *)"msg_address", &OSCsender::msg_address);
-	register_method((char *)"msg_add_int", &OSCsender::msg_add_int);
-	register_method((char *)"msg_add_string", &OSCsender::msg_add_string);
-	register_method((char *)"msg_add_v2", &OSCsender::msg_add_v2);
-	register_method((char *)"msg_add_v3", &OSCsender::msg_add_v3);
-	register_method((char *)"msg_add_quat", &OSCsender::msg_add_quat);
-	register_method((char *)"msg_add_transform", &OSCsender::msg_add_transform);
-	register_method((char *)"msg_send", &OSCsender::msg_send);
-	register_method((char *)"msg_clear", &OSCsender::msg_clear);
-	register_method((char *)"set_ip", &OSCsender::set_ip);
-	register_method((char *)"set_port", &OSCsender::set_port);
-	register_method((char *)"set_buffersize", &OSCsender::set_buffersize);
-	register_method((char *)"set_autostart", &OSCsender::set_autostart);
-	register_method((char *)"set_autoclear", &OSCsender::set_autoclear);
-	register_method((char *)"get_ip", &OSCsender::get_ip);
-	register_method((char *)"get_port", &OSCsender::get_port);
-	register_method((char *)"get_buffersize", &OSCsender::get_buffersize);
-	register_method((char *)"is_autostart", &OSCsender::is_autostart);
-	register_method((char *)"is_autoclear", &OSCsender::is_autoclear);
-	register_method((char *)"is_ready", &OSCsender::is_ready);
-	register_method((char *)"is_started", &OSCsender::is_started);
+	//register_method((char *)"init", &gdosc::OSCsender::init);
+	register_method((char *)"start", &gdosc::OSCsender::start);
+	register_method((char *)"stop", &gdosc::OSCsender::stop);
+	//register_method((char *)"msg_address", &gdosc::OSCsender::msg_address, const godot::String&);
+	//register_method((char *)"msg_add_int", &gdosc::OSCsender::msg_add_int, const int&);
+	//register_method((char *)"msg_add_real", &gdosc::OSCsender::msg_add_real, const real_t&);
+	//register_method((char *)"msg_add_string", &gdosc::OSCsender::msg_add_string, const godot::String&);
+	//register_method((char *)"msg_add_v2", &gdosc::OSCsender::msg_add_v2, const godot::Vector2&);
+	//register_method((char *)"msg_add_v3", &gdosc::OSCsender::msg_add_v3, const godot::Vector3&);
+	//register_method((char *)"msg_add_quat", &gdosc::OSCsender::msg_add_quat, const godot::Quat&);
+	//register_method((char *)"msg_add_transform", &gdosc::OSCsender::msg_add_transform, const godot::Transform&);
+	//register_method((char *)"msg_send", &gdosc::OSCsender::msg_send);
+	//register_method((char *)"msg_clear", &gdosc::OSCsender::msg_clear);
+	//register_method((char *)"set_ip", &gdosc::OSCsender::set_ip, godot::String);
+	//register_method((char *)"set_port", &gdosc::OSCsender::set_port, int);
+	//register_method((char *)"set_buffersize", &gdosc::OSCsender::set_buffersize, int);
+	//register_method((char *)"set_autostart", &gdosc::OSCsender::set_autostart, bool);
+	//register_method((char *)"set_autoclear", &gdosc::OSCsender::set_autoclear, bool);
+	register_method((char *)"get_ip", &gdosc::OSCsender::get_ip);
+	register_method((char *)"get_port", &gdosc::OSCsender::get_port);
+	register_method((char *)"get_buffersize", &gdosc::OSCsender::get_buffersize);
+	register_method((char *)"is_autostart", &gdosc::OSCsender::is_autostart);
+	register_method((char *)"is_autoclear", &gdosc::OSCsender::is_autoclear);
+	register_method((char *)"is_ready", &gdosc::OSCsender::is_ready);
+	register_method((char *)"is_started", &gdosc::OSCsender::is_started);
 	/*
-	register_method((bool)"init", &OSCsender::init);
-	register_method((bool)"start", &OSCsender::start);
-	register_method((void)"stop", &OSCsender::stop);
-	register_method((void)"msg_address", &OSCsender::msg_address);
-	register_method((void)"msg_add_int", &OSCsender::msg_add_int);
-	register_method((void)"msg_add_string", &OSCsender::msg_add_string);
-	register_method((void)"msg_add_v2", &OSCsender::msg_add_v2);
-	register_method((void)"msg_add_v3", &OSCsender::msg_add_v3);
-	register_method((void)"msg_add_quat", &OSCsender::msg_add_quat);
-	register_method((void)"msg_add_transform", &OSCsender::msg_add_transform);
-	register_method((void)"msg_send", &OSCsender::msg_send);
-	register_method((void)"msg_clear", &OSCsender::msg_clear);
-	register_method((void)"set_ip", &OSCsender::set_ip);
-	register_method((void)"set_port", &OSCsender::set_port);
-	register_method((void)"set_buffersize", &OSCsender::set_buffersize);
-	register_method((void)"set_autostart", &OSCsender::set_autostart);
-	register_method((void)"set_autoclear", &OSCsender::set_autoclear);
-	register_method((const String&)"get_ip", &OSCsender::get_ip);
-	register_method((const int&)"get_port", &OSCsender::get_port);
-	register_method((const int&)"get_buffersize", &OSCsender::get_buffersize);
-	register_method((const bool&)"is_autostart", &OSCsender::is_autostart);
-	register_method((const bool&)"is_autoclear", &OSCsender::is_autoclear);
-	register_method((const bool&)"is_ready", &OSCsender::is_ready);
-	register_method((const bool&)"is_started", &OSCsender::is_started);
+	register_method((bool)"init", &gdosc::OSCsender::init);
+	register_method((bool)"start", &gdosc::OSCsender::start);
+	register_method((void)"stop", &gdosc::OSCsender::stop);
+	register_method((void)"msg_address", &gdosc::OSCsender::msg_address);
+	register_method((void)"msg_add_int", &gdosc::OSCsender::msg_add_int);
+	register_method((void)"msg_add_string", &gdosc::OSCsender::msg_add_string);
+	register_method((void)"msg_add_v2", &gdosc::OSCsender::msg_add_v2);
+	register_method((void)"msg_add_v3", &gdosc::OSCsender::msg_add_v3);
+	register_method((void)"msg_add_quat", &gdosc::OSCsender::msg_add_quat);
+	register_method((void)"msg_add_transform", &gdosc::OSCsender::msg_add_transform);
+	register_method((void)"msg_send", &gdosc::OSCsender::msg_send);
+	register_method((void)"msg_clear", &gdosc::OSCsender::msg_clear);
+	register_method((void)"set_ip", &gdosc::OSCsender::set_ip);
+	register_method((void)"set_port", &gdosc::OSCsender::set_port);
+	register_method((void)"set_buffersize", &gdosc::OSCsender::set_buffersize);
+	register_method((void)"set_autostart", &gdosc::OSCsender::set_autostart);
+	register_method((void)"set_autoclear", &gdosc::OSCsender::set_autoclear);
+	register_method((const String&)"get_ip", &gdosc::OSCsender::get_ip);
+	register_method((const int&)"get_port", &gdosc::OSCsender::get_port);
+	register_method((const int&)"get_buffersize", &gdosc::OSCsender::get_buffersize);
+	register_method((const bool&)"is_autostart", &gdosc::OSCsender::is_autostart);
+	register_method((const bool&)"is_autoclear", &gdosc::OSCsender::is_autoclear);
+	register_method((const bool&)"is_ready", &gdosc::OSCsender::is_ready);
+	register_method((const bool&)"is_started", &gdosc::OSCsender::is_started);
 	*/
 }
 
 /*
 void OSCsender::_bind_methods() {
-  ClassDB::bind_method(D_METHOD("init", "ip", "port"), &OSCsender::init);
-  ClassDB::bind_method(D_METHOD("start"), &OSCsender::start);
-  ClassDB::bind_method(D_METHOD("stop"), &OSCsender::stop);
+  ClassDB::bind_method(D_METHOD("init", "ip", "port"), &gdosc::OSCsender::init);
+  ClassDB::bind_method(D_METHOD("start"), &gdosc::OSCsender::start);
+  ClassDB::bind_method(D_METHOD("stop"), &gdosc::OSCsender::stop);
 
-  ClassDB::bind_method(D_METHOD("msg_address", "address"), &OSCsender::msg_address);
-  ClassDB::bind_method(D_METHOD("msg_add_int", "i"), &OSCsender::msg_add_int);
-  ClassDB::bind_method(D_METHOD("msg_add_real", "r"), &OSCsender::msg_add_real);
-  ClassDB::bind_method(D_METHOD("msg_add_string", "s"), &OSCsender::msg_add_string);
-  ClassDB::bind_method(D_METHOD("msg_add_v2", "v"), &OSCsender::msg_add_v2);
-  ClassDB::bind_method(D_METHOD("msg_add_v3", "v"), &OSCsender::msg_add_v3);
-  ClassDB::bind_method(D_METHOD("msg_add_quat", "q"), &OSCsender::msg_add_quat);
-  ClassDB::bind_method(D_METHOD("msg_add_transform", "t"), &OSCsender::msg_add_transform);
-  ClassDB::bind_method(D_METHOD("msg_send"), &OSCsender::msg_send);
-  ClassDB::bind_method(D_METHOD("msg_clear"), &OSCsender::msg_clear);
+  ClassDB::bind_method(D_METHOD("msg_address", "address"), &gdosc::OSCsender::msg_address);
+  ClassDB::bind_method(D_METHOD("msg_add_int", "i"), &gdosc::OSCsender::msg_add_int);
+  ClassDB::bind_method(D_METHOD("msg_add_real", "r"), &gdosc::OSCsender::msg_add_real);
+  ClassDB::bind_method(D_METHOD("msg_add_string", "s"), &gdosc::OSCsender::msg_add_string);
+  ClassDB::bind_method(D_METHOD("msg_add_v2", "v"), &gdosc::OSCsender::msg_add_v2);
+  ClassDB::bind_method(D_METHOD("msg_add_v3", "v"), &gdosc::OSCsender::msg_add_v3);
+  ClassDB::bind_method(D_METHOD("msg_add_quat", "q"), &gdosc::OSCsender::msg_add_quat);
+  ClassDB::bind_method(D_METHOD("msg_add_transform", "t"), &gdosc::OSCsender::msg_add_transform);
+  ClassDB::bind_method(D_METHOD("msg_send"), &gdosc::OSCsender::msg_send);
+  ClassDB::bind_method(D_METHOD("msg_clear"), &gdosc::OSCsender::msg_clear);
 
-  ClassDB::bind_method(D_METHOD("set_ip", "ip"), &OSCsender::set_ip);
-  ClassDB::bind_method(D_METHOD("set_port", "port"), &OSCsender::set_port);
-  ClassDB::bind_method(D_METHOD("set_buffersize", "buffersize"), &OSCsender::set_buffersize);
-  ClassDB::bind_method(D_METHOD("set_autostart", "autostart"), &OSCsender::set_autostart);
-  ClassDB::bind_method(D_METHOD("set_autoclear", "autoclear"), &OSCsender::set_autoclear);
+  ClassDB::bind_method(D_METHOD("set_ip", "ip"), &gdosc::OSCsender::set_ip);
+  ClassDB::bind_method(D_METHOD("set_port", "port"), &gdosc::OSCsender::set_port);
+  ClassDB::bind_method(D_METHOD("set_buffersize", "buffersize"), &gdosc::OSCsender::set_buffersize);
+  ClassDB::bind_method(D_METHOD("set_autostart", "autostart"), &gdosc::OSCsender::set_autostart);
+  ClassDB::bind_method(D_METHOD("set_autoclear", "autoclear"), &gdosc::OSCsender::set_autoclear);
 
-  ClassDB::bind_method(D_METHOD("get_ip"), &OSCsender::get_ip);
-  ClassDB::bind_method(D_METHOD("get_port"), &OSCsender::get_port);
-  ClassDB::bind_method(D_METHOD("get_buffersize"), &OSCsender::get_buffersize);
-  ClassDB::bind_method(D_METHOD("is_autostart"), &OSCsender::is_autostart);
-  ClassDB::bind_method(D_METHOD("is_autoclear"), &OSCsender::is_autoclear);
-  ClassDB::bind_method(D_METHOD("is_ready"), &OSCsender::is_ready);
-  ClassDB::bind_method(D_METHOD("is_started"), &OSCsender::is_started);
+  ClassDB::bind_method(D_METHOD("get_ip"), &gdosc::OSCsender::get_ip);
+  ClassDB::bind_method(D_METHOD("get_port"), &gdosc::OSCsender::get_port);
+  ClassDB::bind_method(D_METHOD("get_buffersize"), &gdosc::OSCsender::get_buffersize);
+  ClassDB::bind_method(D_METHOD("is_autostart"), &gdosc::OSCsender::is_autostart);
+  ClassDB::bind_method(D_METHOD("is_autoclear"), &gdosc::OSCsender::is_autoclear);
+  ClassDB::bind_method(D_METHOD("is_ready"), &gdosc::OSCsender::is_ready);
+  ClassDB::bind_method(D_METHOD("is_started"), &gdosc::OSCsender::is_started);
   
   ADD_GROUP("Network", "");
   ADD_PROPERTY(PropertyInfo(Variant::STRING, "ip", PROPERTY_HINT_LENGTH, "7"), "set_ip", "get_ip");

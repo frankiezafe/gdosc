@@ -51,34 +51,36 @@ void OSCmessage::copy(const OSCmessage& src) {
 
 void OSCmessage::_register_methods() {
 	
-	//register_property((char *)"base/name", &OSCmessage::_name, String("OSCmessage"));
+	//register_property((char *)"base/name", &gdosc::OSCmessage::_name, String("OSCmessage"));
 	
-	register_method((char *)"empty", &OSCmessage::empty);
-	register_method((char *)"ip", &OSCmessage::ip);
-	register_method((char *)"port", &OSCmessage::port);
-	register_method((char *)"address", &OSCmessage::address);
-	register_method((char *)"typetag", &OSCmessage::typetag);
-	register_method((char *)"arg_num", &OSCmessage::arg_num);
-	register_method((char *)"arg", &OSCmessage::arg);
+	register_method((char *)"empty", &gdosc::OSCmessage::empty);
+	register_method((char *)"ip", &gdosc::OSCmessage::ip);
+	register_method((char *)"port", &gdosc::OSCmessage::port);
+	register_method((char *)"address", &gdosc::OSCmessage::address);
+	register_method((char *)"typetag", &gdosc::OSCmessage::typetag);
+	register_method((char *)"arg_num", &gdosc::OSCmessage::arg_num);
+	//register_method((char *)"arg", &gdosc::OSCmessage::arg);
+	
 	/*
-	register_method((bool)"empty", &OSCmessage::empty);
-	register_method((const String&)"ip", &OSCmessage::ip);
-	register_method((const int&)"port", &OSCmessage::port);
-	register_method((const String&)"address", &OSCmessage::address);
-	register_method((const String&)"typetag", &OSCmessage::typetag);
-	register_method((const int&)"arg_num", &OSCmessage::arg_num);
-	register_method((const Variant&)"arg", &OSCmessage::arg);
+	register_method((bool)"empty", &gdosc::OSCmessage::empty);
+	register_method((const String&)"ip", &gdosc::OSCmessage::ip);
+	register_method((const int&)"port", &gdosc::OSCmessage::port);
+	register_method((const String&)"address", &gdosc::OSCmessage::address);
+	register_method((const String&)"typetag", &gdosc::OSCmessage::typetag);
+	register_method((const int&)"arg_num", &gdosc::OSCmessage::arg_num);
+	register_method((const Variant&)"arg", &gdosc::OSCmessage::arg);
 	*/
+	
 }
 
 /*
 void OSCmessage::_bind_methods() {
-  ClassDB::bind_method(D_METHOD("empty"), &OSCmessage::empty);
-  ClassDB::bind_method(D_METHOD("ip"), &OSCmessage::ip);
-  ClassDB::bind_method(D_METHOD("port"), &OSCmessage::port);
-  ClassDB::bind_method(D_METHOD("address"), &OSCmessage::address);
-  ClassDB::bind_method(D_METHOD("typetag"), &OSCmessage::typetag);
-  ClassDB::bind_method(D_METHOD("arg_num"), &OSCmessage::arg_num);
-  ClassDB::bind_method(D_METHOD("arg", "p_idx"), &OSCmessage::arg);
+  ClassDB::bind_method(D_METHOD("empty"), &gdosc::OSCmessage::empty);
+  ClassDB::bind_method(D_METHOD("ip"), &gdosc::OSCmessage::ip);
+  ClassDB::bind_method(D_METHOD("port"), &gdosc::OSCmessage::port);
+  ClassDB::bind_method(D_METHOD("address"), &gdosc::OSCmessage::address);
+  ClassDB::bind_method(D_METHOD("typetag"), &gdosc::OSCmessage::typetag);
+  ClassDB::bind_method(D_METHOD("arg_num"), &gdosc::OSCmessage::arg_num);
+  ClassDB::bind_method(D_METHOD("arg", "p_idx"), &gdosc::OSCmessage::arg);
 }
 */
