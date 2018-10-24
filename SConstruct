@@ -48,6 +48,10 @@ env.Append(LIBS=["godot-cpp" + "." + platform + "." + str(bits)])
 
 sources = []
 add_sources(sources, "src")
+add_sources(sources, "src/oscpack/")
+add_sources(sources, "src/oscpack/osc/")
+add_sources(sources, "src/oscpack/ip/")
+add_sources(sources, ip_path)
 
 library = env.SharedLibrary(target=final_lib_path + 'libgdosc', source=sources)
 Default(library)
