@@ -285,6 +285,12 @@ void OSCsender::_register_methods() {
 	
 	//register_property((char *)"base/name", &gdosc::OSCsender::_name, String("OSCsender"));
 	
+	register_property( (char *)"network/ip", &gdosc::OSCsender::_ip, String("127.0.0.1") );
+	register_property( (char *)"network/port", &gdosc::OSCsender::_port, int(0) );
+	register_property( (char *)"network/buffersize", &gdosc::OSCsender::_buffersize, int(1024) );
+	register_property( (char *)"network/autostart", &gdosc::OSCsender::_autostart, true );
+	register_property( (char *)"network/autoclear", &gdosc::OSCsender::_autoclear, true );
+	
 	register_method((char *)"start", &gdosc::OSCsender::start);
 	register_method((char *)"stop", &gdosc::OSCsender::stop);
 	
@@ -376,5 +382,6 @@ void OSCsender::_bind_methods() {
 			   "get_buffersize");
   ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autostart"), "set_autostart", "is_autostart");
   ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autoclear"), "set_autoclear", "is_autoclear");
+  
 }
 */

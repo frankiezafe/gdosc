@@ -277,6 +277,13 @@ void OSCreceiver::_register_methods() {
 	
 	//register_property((char *)"base/name", &gdosc::OSCreceiver::_name, String("OSCreceiver"));
 	
+	register_property( (char *)"network/port", &gdosc::OSCreceiver::_port, int(0) );
+	register_property( (char *)"network/max_queue", &gdosc::OSCreceiver::_max_queue, std::size_t(100) );
+	register_property( (char *)"network/autostart", &gdosc::OSCreceiver::_autostart, true );
+	register_property( (char *)"network/emit_signal", &gdosc::OSCreceiver::_emit_signal, true );
+	
+	//register_signal<gdsoc::OSCreceiver>(String("osc_message_received"));
+	
 	register_method((char *)"start", &gdosc::OSCreceiver::start);
 	register_method((char *)"stop", &gdosc::OSCreceiver::stop);
 	
@@ -291,6 +298,7 @@ void OSCreceiver::_register_methods() {
 	register_method((char *)"is_emit_signal", &gdosc::OSCreceiver::is_emit_signal);
 	register_method((char *)"has_waiting_messages", &gdosc::OSCreceiver::has_waiting_messages);
 	register_method((char *)"get_next_message", &gdosc::OSCreceiver::get_next_message);
+	
 	/*
 	register_method((bool)"init", &gdosc::OSCreceiver::init);
 	register_method((bool)"start", &gdosc::OSCreceiver::start);
@@ -305,6 +313,7 @@ void OSCreceiver::_register_methods() {
 	register_method((bool)"has_waiting_messages", &gdosc::OSCreceiver::has_waiting_messages);
 	register_method((Ref<OSCmessage>)"get_next_message", &gdosc::OSCreceiver::get_next_message);
 	*/
+	
 }
 
 /*
