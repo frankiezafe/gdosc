@@ -27,9 +27,24 @@ just verifying that the basic example is compiling
 `scons platform=linux`
 
 
-## errors
+## devlog
 
 ### 2018/10/25
+
+#### done
+
+* all set methods are using Variant instead of typed arguments
+* utils contains methods to check variant easily
+* registration of methods and properties for gdnative
+* adaptation of godot macros ( see GODOT_SUBCLASS )
+* include and SConstruct adaptations, should be cross-platform
+
+#### todo
+
+* enable OSCreceiver signal in OSCreceiver.cpp, line 285 (crash at compilation)
+* verify gdnlib & gdns in demo/bin/
+* debug loadong in gdscript
+* make OSCsender & OSCreceiver appears in the object selector in godot
 
 #### gdscript
 
