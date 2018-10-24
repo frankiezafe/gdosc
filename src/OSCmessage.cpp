@@ -1,5 +1,7 @@
 #include "OSCmessage.h"
 
+using namespace godot;
+
 OSCmessage::OSCmessage() : _port(0), _valid(false) {}
 
 OSCmessage::OSCmessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint)

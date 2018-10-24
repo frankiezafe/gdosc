@@ -1,5 +1,7 @@
 #include "OSCreceiver.h"
 
+using namespace godot;
+
 OSCreceiver::OSCreceiver()
     : _lsocket(0),
       _port(23000),

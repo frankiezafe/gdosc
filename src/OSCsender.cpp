@@ -1,5 +1,7 @@
 #include "OSCsender.h"
 
+using namespace godot;
+
 OSCsender::OSCsender()
     : _ip("127.0.0.1"),
       _port(0),

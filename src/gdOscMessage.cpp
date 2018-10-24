@@ -1,5 +1,7 @@
 #include "gdOscMessage.h"
 
+using namespace godot;
+
 gdOscMessage::gdOscMessage() : remoteHost(""), remotePort(0) {}
 
 gdOscMessage::~gdOscMessage() { clear(); }
