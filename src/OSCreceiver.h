@@ -1,3 +1,6 @@
+#ifndef GDOSC_RECEIVER_H
+#define GDOSC_RECEIVER_H
+
 #include <cstdlib>
 #include <cstring>
 #include <deque>
@@ -6,6 +9,7 @@
 #include <mutex>
 #include <thread>
 
+#include "Ref.hpp"
 #include "Engine.hpp"
 #include "Object.hpp"
 #include "MainLoop.hpp"
@@ -19,13 +23,12 @@
 #include "OscReceivedElements.h"
 #include "OSCmessage.h"
 
-#ifndef GDOSC_RECEIVER_H
-#define GDOSC_RECEIVER_H
-
 namespace godot {
 	
-	class OSCreceiver : public Node, public osc::OscPacketListener {
-	GDCLASS(OSCreceiver, Node);
+	class OSCreceiver : public godot::Node, public osc::OscPacketListener {
+		GODOT_SUBCLASS(OSCreceiver, godot::Node)
+		//GODOT_CLASS(OSCreceiver)
+		//GDCLASS(OSCreceiver, Node);
 
 	public:
 		
@@ -56,10 +59,10 @@ namespace godot {
 		void set_emit_signal(bool emit_signal);
 
 		// getters
-		_FORCE_INLINE_ const int& get_port() const { return _port; }
-		_FORCE_INLINE_ int get_max_queue() const { return (int)_max_queue; }
-		_FORCE_INLINE_ const bool& is_autostart() const { return _autostart; }
-		_FORCE_INLINE_ const bool& is_emit_signal() const { return _emit_signal; }
+		inline const int& get_port() const { return _port; }
+		inline int get_max_queue() const { return (int)_max_queue; }
+		inline const bool& is_autostart() const { return _autostart; }
+		inline const bool& is_emit_signal() const { return _emit_signal; }
 
 	protected:
 		

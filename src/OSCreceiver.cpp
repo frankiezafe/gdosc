@@ -11,7 +11,8 @@ OSCreceiver::OSCreceiver()
       _native_mode(false),
       _gd_queue_write(0),
       _gd_queue_read(0) {
-  Ref<OSCmessage> rom = memnew(OSCmessage);
+  //Ref<OSCmessage> rom = memnew(OSCmessage);
+  Ref<OSCmessage> rom = new OSCmessage();
   _gd_next_msg = rom;
 }
 
@@ -225,6 +226,8 @@ void OSCreceiver::_notification(int p_what) {
 }
 
 void OSCreceiver::_bind_methods() {
+
+/*
   ClassDB::bind_method(D_METHOD("init", "port"), &OSCreceiver::init);
   ClassDB::bind_method(D_METHOD("start"), &OSCreceiver::start);
   ClassDB::bind_method(D_METHOD("stop"), &OSCreceiver::stop);
@@ -248,4 +251,6 @@ void OSCreceiver::_bind_methods() {
                "get_max_queue");
   ADD_PROPERTY(PropertyInfo(Variant::BOOL, "autostart"), "set_autostart", "is_autostart");
   ADD_PROPERTY(PropertyInfo(Variant::BOOL, "emit_signal"), "set_emit_signal", "is_emit_signal");
+*/
+
 }

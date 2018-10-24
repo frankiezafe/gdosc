@@ -1,3 +1,6 @@
+#ifndef _OSCMESSAGE_
+#define _OSCMESSAGE_
+
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
@@ -7,9 +10,6 @@
 #include "String.hpp"
 
 #include "gdOscArg.h"
-
-#ifndef _OSCMESSAGE_
-#define _OSCMESSAGE_
 
 namespace godot {
 

@@ -1,3 +1,6 @@
+#ifndef GDOSC_SENDER_H
+#define GDOSC_SENDER_H
+
 #include <ip/UdpSocket.h>
 #include <cstdlib>
 #include <cstring>
@@ -13,13 +16,12 @@
 #include "gdOscMessage.h"
 #include "OscOutboundPacketStream.h"
 
-#ifndef GDOSC_SENDER_H
-#define GDOSC_SENDER_H
-
 namespace godot {
 	
-	class OSCsender : public Node {
-		GDCLASS(OSCsender, Node);
+	class OSCsender : public godot::Node {
+		GODOT_SUBCLASS(OSCsender, godot::Node)
+		//GODOT_CLASS(OSCsender);
+		//GDCLASS(OSCsender, Node);
 
 		public:
 		
@@ -59,13 +61,13 @@ namespace godot {
 			void set_autoclear(bool autoclear);
 
 			// getters
-			_FORCE_INLINE_ const String& get_ip() const { return _ip; }
-			_FORCE_INLINE_ const int& get_port() const { return _port; }
-			_FORCE_INLINE_ const int& get_buffersize() const { return _buffersize; }
-			_FORCE_INLINE_ const bool& is_autostart() const { return _autostart; }
-			_FORCE_INLINE_ const bool& is_autoclear() const { return _autoclear; }
-			_FORCE_INLINE_ const bool& is_ready() const { return _ready; }
-			_FORCE_INLINE_ const bool& is_started() const { return _started; }
+			inline const String& get_ip() const { return _ip; }
+			inline const int& get_port() const { return _port; }
+			inline const int& get_buffersize() const { return _buffersize; }
+			inline const bool& is_autostart() const { return _autostart; }
+			inline const bool& is_autoclear() const { return _autoclear; }
+			inline const bool& is_ready() const { return _ready; }
+			inline const bool& is_started() const { return _started; }
 
 		protected:
 		

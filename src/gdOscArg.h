@@ -1,7 +1,7 @@
-#include <string>
-
 #ifndef _GDOSCARG_
 #define _GDOSCARG_
+
+#include <string>
 
 namespace godot {
 	
