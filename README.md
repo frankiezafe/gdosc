@@ -33,8 +33,7 @@ just verifying that the basic example is compiling
 
 result:
 
-`
-ERROR: get_symbol: No valid library handle, can't get symbol from GDNative object
+`ERROR: get_symbol: No valid library handle, can't get symbol from GDNative object
 
    At: modules/gdnative/gdnative.cpp:480.
 
@@ -63,8 +62,7 @@ gdscript :
 
 result:
 
-`
-ERROR: poll: res://bin/OSCreceiver.gdns:9 - Parse Error: Can't load cached ext-resource #1
+`ERROR: poll: res://bin/OSCreceiver.gdns:9 - Parse Error: Can't load cached ext-resource #1
 
    At: scene/resources/scene_format_text.cpp:587.
 
