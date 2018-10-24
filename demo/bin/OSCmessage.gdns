@@ -1,10 +1,10 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="NativeScript" load_steps=2 format=2]
 
-[ext_resource path="res://bin/gdosc.gdnlib" type="GDNativeLibrary" id=1]
+[ext_resource path="res://bin/gdosc.gdnlib" type="GDNativeLibrary" id=100]
 
 [resource]
 
 resource_name = "OSCmessage"
-class_name = "osc_message"
+class_name = "OSCmessage"
 library = ExtResource( 1 )
 _sections_unfolded = [ "Resource" ]

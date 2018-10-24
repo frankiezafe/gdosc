@@ -1,10 +1,10 @@
-[gd_resource type="Node" load_steps=2 format=2]
+[gd_resource type="NativeScript" load_steps=2 format=2]
 
-[ext_resource path="res://bin/gdosc.gdnlib" type="GDNativeLibrary" id=1]
+[ext_resource path="res://bin/gdosc.gdnlib" type="GDNativeLibrary" id=102]
 
 [resource]
 
 resource_name = "OSCsender"
-class_name = "osc_sender"
+class_name = "OSCsender"
 library = ExtResource( 1 )
 _sections_unfolded = [ "Resource" ]
