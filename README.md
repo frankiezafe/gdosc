@@ -29,7 +29,9 @@ just verifying that the basic example is compiling
 
 ## errors
 
-### new gdnative script inheriting from OSCreceiver
+### 2018/10/25
+
+#### new gdnative script inheriting from OSCreceiver
 
 result:
 
@@ -48,7 +50,7 @@ result:
 	ERROR: open_dynamic_library: Can't open dynamic library: /home/frankiezafe/forge.godot/gdnative_osc/demo/bin/x11/libgdosc.so. Error: /home/frankiezafe/forge.godot/gdnative_osc/demo/bin/x11/libgdosc.so: undefined symbol: _ZTI9UdpSocket
 	   At: drivers/unix/os_unix.cpp:415.
 
-### new gdscript
+#### new gdscript
 
 gdscript :
 
