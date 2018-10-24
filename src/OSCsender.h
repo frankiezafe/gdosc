@@ -44,7 +44,11 @@ namespace gdosc {
 			// message related
 
 			// construction of the message
-			void msg_address(const godot::String& address);
+			//void msg_address(const godot::String& address);
+			void set_address(godot::Variant);
+			void append(godot::Variant);
+			
+			// not available in gdnative, go via append(Variant)
 			void msg_add_int(const int& i);
 			void msg_add_real(const real_t& r);
 			void msg_add_string(const godot::String& s);
@@ -62,11 +66,18 @@ namespace gdosc {
 			void msg_clear();
 
 			// setters
+			void set_ip(godot::Variant);
+			void set_port(godot::Variant);
+			void set_buffersize(godot::Variant);
+			void set_autostart(godot::Variant);
+			void set_autoclear(godot::Variant);
+			/*
 			void set_ip(godot::String ip);
 			void set_port(int port);
 			void set_buffersize(int buffersize);
 			void set_autostart(bool autostart);
 			void set_autoclear(bool autoclear);
+			*/
 
 			// getters
 			const godot::String& get_ip() const { return _ip; }

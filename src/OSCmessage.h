@@ -8,6 +8,7 @@
 #include <Array.hpp>
 #include <Resource.hpp>
 
+#include <utils.h>
 #include <IpEndpointName.h>
 #include <OscReceivedElements.h>
 
@@ -42,6 +43,7 @@ namespace gdosc {
 		const godot::String& typetag() const { return _typetag; }
 		const int& arg_num() const { return _arg_num; }
 		const godot::Variant& arg(int p_idx) const { return _arguments[p_idx]; }
+		const godot::Variant& get(godot::Variant) const;
 		
 		// operators
 		void copy(const OSCmessage& src);
@@ -62,6 +64,7 @@ namespace gdosc {
 		godot::String _typetag;
 		int _arg_num;
 		godot::Array _arguments;
+		godot::Variant empty_arg;
 		
 	};
 

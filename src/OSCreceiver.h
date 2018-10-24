@@ -17,6 +17,7 @@
 #include <MainLoop.hpp>
 #include <Node.hpp>
 
+#include <utils.h>
 #include <gdOscMessage.h>
 #include <PacketListener.h>
 #include <UdpSocket.h>
@@ -61,10 +62,16 @@ namespace gdosc {
 		bool getNextMessage(gdOscMessage& msg);
 
 		// setters
+		bool set_port(godot::Variant);
+		void set_max_queue(godot::Variant);
+		void set_autostart(godot::Variant);
+		void set_emit_signal(godot::Variant);
+		/*
 		bool set_port(int port);
 		void set_max_queue(int max_queue);
 		void set_autostart(bool autostart);
 		void set_emit_signal(bool emit_signal);
+		*/
 
 		// getters
 		const int& get_port() const { return _port; }

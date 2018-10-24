@@ -49,6 +49,14 @@ void OSCmessage::copy(const OSCmessage& src) {
   _arguments = src.arguments();
 }
 
+const Variant& OSCmessage::get(Variant arg) const {
+	int i;
+	if ( utils::getInt( arg, i ) && i > -1 ) {
+		return _arguments[i];
+	}
+	return empty_arg;
+}
+
 void OSCmessage::_register_methods() {
 	
 	//register_property((char *)"base/name", &gdosc::OSCmessage::_name, String("OSCmessage"));
@@ -59,17 +67,7 @@ void OSCmessage::_register_methods() {
 	register_method((char *)"address", &gdosc::OSCmessage::address);
 	register_method((char *)"typetag", &gdosc::OSCmessage::typetag);
 	register_method((char *)"arg_num", &gdosc::OSCmessage::arg_num);
-	//register_method((char *)"arg", &gdosc::OSCmessage::arg);
-	
-	/*
-	register_method((bool)"empty", &gdosc::OSCmessage::empty);
-	register_method((const String&)"ip", &gdosc::OSCmessage::ip);
-	register_method((const int&)"port", &gdosc::OSCmessage::port);
-	register_method((const String&)"address", &gdosc::OSCmessage::address);
-	register_method((const String&)"typetag", &gdosc::OSCmessage::typetag);
-	register_method((const int&)"arg_num", &gdosc::OSCmessage::arg_num);
-	register_method((const Variant&)"arg", &gdosc::OSCmessage::arg);
-	*/
+	register_method((char *)"get", &gdosc::OSCmessage::get);
 	
 }
 

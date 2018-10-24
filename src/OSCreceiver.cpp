@@ -67,11 +67,23 @@ void OSCreceiver::swap_buffers() {
   _lmutex.unlock();
 }
 
+/*
 bool OSCreceiver::set_port(int port) {
   if (port < 1) return false;
   stop();
   _port = port;
   return true;
+}
+*/
+
+bool OSCreceiver::set_port( Variant port ) {
+	int i;
+	if ( !utils::getInt( port, i ) || i <= 0 ) {
+		return false;
+	}
+	stop();
+	_port = i;
+	return true;
 }
 
 bool OSCreceiver::start() {
@@ -179,9 +191,33 @@ bool OSCreceiver::getNextMessage(gdOscMessage& msg) {
   return true;
 }
 
-void OSCreceiver::set_autostart(bool autostart) { _autostart = autostart; }
+/*
+void OSCreceiver::set_autostart(bool autostart) { 
+	_autostart = autostart;
+}
+*/
 
-void OSCreceiver::set_emit_signal(bool emit_signal) { _emit_signal = emit_signal; }
+void OSCreceiver::set_autostart(Variant autostart) {
+	bool b;
+	if ( !utils::getBool( autostart, b ) ) {
+		return;
+	}
+	_autostart = b;
+}
+
+/*
+void OSCreceiver::set_emit_signal(bool emit_signal) { 
+	_emit_signal = emit_signal;
+}
+*/
+
+void OSCreceiver::set_emit_signal(Variant emit_signal) {
+	bool b;
+	if ( !utils::getBool( emit_signal, b ) ) {
+		return;
+	}
+	_emit_signal = b;
+}
 
 void OSCreceiver::check_queue() {
   if (!_native_mode && _gd_queue_write && _gd_queue_write->size() > _max_queue) {
@@ -192,10 +228,21 @@ void OSCreceiver::check_queue() {
   }
 }
 
+/*
 void OSCreceiver::set_max_queue(int max_queue) {
-  if (max_queue < 1) return;
-  _max_queue = (std::size_t)max_queue;
-  check_queue();
+	if (max_queue < 1) return;
+	_max_queue = (std::size_t)max_queue;
+	check_queue();
+}
+*/
+
+void OSCreceiver::set_max_queue(Variant max_queue) {
+	int i;
+	if ( !utils::getInt( max_queue, i ) || i <= 0 ) {
+		return;
+	}
+	_max_queue = (std::size_t)i;
+	check_queue();
 }
 
 void OSCreceiver::_notification(int p_what) {
@@ -230,12 +277,14 @@ void OSCreceiver::_register_methods() {
 	
 	//register_property((char *)"base/name", &gdosc::OSCreceiver::_name, String("OSCreceiver"));
 	
-	//register_method((char *)"init", &gdosc::OSCreceiver::init);
 	register_method((char *)"start", &gdosc::OSCreceiver::start);
 	register_method((char *)"stop", &gdosc::OSCreceiver::stop);
-	//register_method((char *)"set_max_queue", &gdosc::OSCreceiver::set_max_queue);
-	//register_method((char *)"set_autostart", &gdosc::OSCreceiver::set_autostart);
-	//register_method((char *)"set_emit_signal", &gdosc::OSCreceiver::set_emit_signal);
+	
+	register_method((char *)"set_port", &gdosc::OSCreceiver::set_port);
+	register_method((char *)"set_max_queue", &gdosc::OSCreceiver::set_max_queue);
+	register_method((char *)"set_autostart", &gdosc::OSCreceiver::set_autostart);
+	register_method((char *)"set_emit_signal", &gdosc::OSCreceiver::set_emit_signal);
+	
 	register_method((char *)"get_port", &gdosc::OSCreceiver::get_port);
 	register_method((char *)"get_max_queue", &gdosc::OSCreceiver::get_max_queue);
 	register_method((char *)"is_autostart", &gdosc::OSCreceiver::is_autostart);
