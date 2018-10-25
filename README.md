@@ -63,7 +63,31 @@ result:
 	ERROR: _load: Failed loading resource: res://bin/OSCreceiver.gdns
 	   At: core/io/resource_loader.cpp:192.
 
+### 2018/10/25
 
+#### done
+
+* Fix linking oscpack shared object files
+
+#### pitfall
+
+* SConstruct is definitely not cross-platform friendly, see comment in-file
+
+#### Warnings
+
+When loading the project, I get this in Godot's output window
+
+```
+ drivers/unix/net_socket_posix.cpp:301 - Method/Function Failed, returning: ERR_UNAVAILABLE
+ modules/gdnative/gdnative.cpp:480 - No valid library handle, can't get symbol from GDNative object
+ modules/gdnative/gdnative.cpp:386 - No valid library handle, can't terminate GDNative object
+ Can't open dynamic library: /home/mis/src/gdnative_osc/demo/bin/x11/libgdosc.so. Error: /home/mis/src/gdnative_osc/demo/bin/x11/libgdosc.so: undefined symbol: nativescript_api
+```
+
+Also, in the console, possibly related to Frankie's *todo* point #4
+```
+ERROR: _load: Failed loading resource: res://bin/OSCreceiver.gdns
+```
 
 ## links
 
