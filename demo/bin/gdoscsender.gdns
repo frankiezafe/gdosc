@@ -4,8 +4,7 @@
 
 [resource]
 
-resource_name = "myOSCreceiver"
-class_name = "myOSCreceiver"
+resource_name = "oscsender"
+class_name = "oscsender"
 library = ExtResource( 1 )
-_sections_unfolded = [ "Resource", "Script Class", "library" ]
-
+_sections_unfolded = [ "Resource" ]

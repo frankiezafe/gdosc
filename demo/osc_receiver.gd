@@ -1,12 +1,21 @@
 extends Spatial
 
-var receiver;
+var oscsender
+var cube
 
 func _ready():
 	
-	receiver = load("res://bin/OSCreceiver.gdns").new()
-	pass # Replace with function body.
+	cube = get_node( "../cube" )
+	
+	oscsender = load("res://bin/gdoscsender.gdns").new()
+	oscsender.setup( "127.0.0.1", 12000 )
+	oscsender.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	cube.rotate_y( delta * 1 )
+	oscsender.msg("/gdosc")
+	oscsender.add( self )
+	oscsender.add( cube.rotation )
+	oscsender.add( cube.translation )
+	oscsender.send()
+	pass

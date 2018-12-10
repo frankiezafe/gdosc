@@ -19,19 +19,51 @@
 #include <UdpSocket.h>
 #include <OscOutboundPacketStream.h>
 
-namespace osc {
+#include <OscTypes.h>
+#include <UdpSocket.h>
+#include <OscOutboundPacketStream.h>
+
+namespace godot {
 
     class oscsender : public godot::GodotScript<godot::Node> {
-        GODOT_CLASS(gd_script_node)
-        
+        GODOT_CLASS(oscsender)
+
     public:
-        
-	static void _register_methods();
-        
+
+        static void _register_methods();
+
         oscsender();
-        virtual ~oscsender();
         
+        virtual ~oscsender();
+
+        bool setup(godot::String ip, unsigned int port);
+
+        bool start();
+
+        void stop();
+        
+        void msg( godot::String address );
+        
+        void add( godot::Variant var );
+        
+        void send();
+
     private:
+
+        std::string _ip;
+        int _port;
+        std::size_t _buffer_size;
+        String _endpoint;
+        bool _ready;
+        bool _running;
+        
+        UdpTransmitSocket* _socket;
+        
+        char* _buffer;
+        osc::OutboundPacketStream* _packet;
+        bool _packet_closed;
+        
+        void reset_message();
 
     };
 };
