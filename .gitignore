@@ -18,3 +18,4 @@ demo/bin/x11/*
 demo/bin/windows/*
 demo/bin/osx/*
 tmp/*
+nbproject/*
