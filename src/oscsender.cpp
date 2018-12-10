@@ -131,6 +131,7 @@ void oscsender::reset_message() {
 void oscsender::msg(godot::String address) {
 
     reset_message();
+    
     std::wstring ws = address.unicode_str();
     std::string std_address(ws.begin(), ws.end());
 
