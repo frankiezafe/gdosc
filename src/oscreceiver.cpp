@@ -19,15 +19,20 @@ using namespace osc;
 void oscreceiver::_register_methods() {
     register_method("setup", &oscreceiver::setup);
     register_method("start", &oscreceiver::start);
+    register_method("stop", &oscreceiver::stop);
+    register_method("has_message", &oscreceiver::has_message);
+    register_method("get_next", &oscreceiver::get_next);
 }
 
 oscreceiver::oscreceiver() :
 _port(0),
-_ready(false), _running(false),
+_ready(false), _running(false), _swap_needed(true),
 _lsocket(0),
 _max_queue(100),
 _gd_queue_write(0),
-_gd_queue_read(0) {
+_gd_queue_read(0),
+_qread_index(0), _qread_len(0)
+{
 }
 
 oscreceiver::~oscreceiver() {
@@ -159,11 +164,16 @@ void oscreceiver::purge_buffers() {
 
 void oscreceiver::swap_buffers() {
 
+    _gd_queue_read->clear();
+    
     _lmutex.lock();
     std::deque<oscmsg_data>* tmp = _gd_queue_write;
     _gd_queue_write = _gd_queue_read;
     _gd_queue_read = tmp;
     _lmutex.unlock();
+    
+    _qread_index = 0;
+    _qread_len = _gd_queue_read->size();
 
 }
 
@@ -189,4 +199,31 @@ void oscreceiver::check_queue() {
     }
     _lmutex.unlock();
 
+}
+
+bool oscreceiver::has_message() {
+    
+    if ( _swap_needed ) {
+        swap_buffers();
+        _swap_needed = false;
+    }
+    
+    if ( _qread_index == _qread_len ) {
+        _swap_needed = true;
+        return false;
+    }
+    
+    return true;
+    
+}
+
+godot::Dictionary oscreceiver::get_next() {
+    
+    if ( _qread_index == _qread_len ) {
+        return godot::Dictionary();
+    }
+    
+    return _gd_queue_read->at( _qread_index ).data;
+    ++_qread_index;
+    
 }

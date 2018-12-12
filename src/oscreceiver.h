@@ -54,12 +54,17 @@ namespace osc {
         bool start();
 
         void stop();
+        
+        bool has_message();
+        
+        godot::Dictionary get_next();
 
     protected:
 
         int _port;
         bool _ready;
         bool _running;
+        bool _swap_needed;
 
         // real processing stuff
 
@@ -71,7 +76,9 @@ namespace osc {
 
         std::deque<oscmsg_data>* _gd_queue_write;
         std::deque<oscmsg_data>* _gd_queue_read;
-
+        std::size_t _qread_index;
+        std::size_t _qread_len;
+        
         void ProcessMessage(
                 const osc::ReceivedMessage& m,
                 const IpEndpointName& remoteEndpoint);

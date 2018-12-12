@@ -28,71 +28,63 @@ namespace osc {
     public:
 
         bool valid;
-        godot::String ip;
-        int port;
-        godot::String address;
-        godot::String typetag;
-        int arg_num;
-        godot::Array arguments;
+        godot::Dictionary data;
 
-        oscmsg_data() : valid(false), port(0), arg_num(0) {
+        oscmsg_data() : valid(false) {
         }
 
         oscmsg_data(
                 const osc::ReceivedMessage& m,
                 const IpEndpointName& rep) {
 
-            address = godot::String(m.AddressPattern());
-            typetag = godot::String(m.TypeTags());
+            data[ "address" ] = godot::String(m.AddressPattern());
+            data[ "typetag" ] = godot::String(m.TypeTags());
             char endpointHost[IpEndpointName::ADDRESS_STRING_LENGTH];
             rep.AddressAsString(endpointHost);
-            ip = godot::String(endpointHost);
-            port = rep.port;
+            data[ "ip" ] = godot::String(endpointHost);
+            data[ "port" ] = rep.port;
 
+            godot::Array args;
             try {
-
                 for (::osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin(); arg != m.ArgumentsEnd();
                         ++arg) {
                     if (arg->IsInt32()) {
-                        arguments.append(arg->AsInt32Unchecked());
+                        args.append(arg->AsInt32Unchecked());
                     } else if (arg->IsFloat()) {
-                        arguments.append(arg->AsFloatUnchecked());
+                        args.append(arg->AsFloatUnchecked());
                     } else if (arg->IsString()) {
-                        arguments.append(godot::String(arg->AsStringUnchecked()));
+                        args.append(godot::String(arg->AsStringUnchecked()));
                     } else if (arg->IsBool()) {
-                        arguments.append(arg->AsBool());
+                        args.append(arg->AsBool());
+                    } else {
+                        args.append(false);
                     }
                 }
 
             } catch (osc::Exception& e) {
                 // any parsing errors such as unexpected argument types, or
                 // missing arguments get thrown as exceptions.
-                std::cout << "error while parsing message: " << m.AddressPattern() << ": " << e.what() << "\n";
+                godot::String s = "oscmsg_data, error while parsing message ";
+                s += m.AddressPattern();
+                s += ": ";
+                s += e.what();
+                godot::Godot::print(s);
             }
 
-            arg_num = arguments.size();
+            data[ "args" ] = args;
+            data[ "arg_num" ] = args.size();
             valid = true;
 
         }
 
         oscmsg_data(const oscmsg_data& src) {
             valid = src.valid;
-            ip = src.ip;
-            port = src.port;
-            address = src.address;
-            typetag = src.typetag;
-            arg_num = src.arg_num;
-            arguments = src.arguments;
+            data = src.data;
         }
 
         inline void operator=(const oscmsg_data& src) {
             valid = src.valid;
-            ip = src.ip;
-            port = src.port;
-            address = src.address;
-            typetag = src.typetag;
-            arg_num = src.arg_num;
-            arguments = src.arguments;
+            data = src.data;
         }
 
     };

@@ -12,5 +12,8 @@ func _ready():
 	oscrcv.start()
 
 func _process(delta):
-
+	
+	while( oscrcv.has_message() ):
+		var msg = oscrcv.get_next()
+	
 	pass
