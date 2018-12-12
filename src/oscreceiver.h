@@ -14,16 +14,31 @@
 #ifndef OSCRECEIVER_H
 #define OSCRECEIVER_H
 
+#include <cstdlib>
+#include <cstring>
+#include <deque>
+#include <iostream>
+#include <memory>
+#include <mutex>
+#include <thread>
+
 #include <Godot.hpp>
 #include <Node.hpp>
 
 #include <OscTypes.h>
 #include <UdpSocket.h>
-#include <OscOutboundPacketStream.h>
+#include <PacketListener.h>
+#include <OscPacketListener.h>
+#include <OscReceivedElements.h>
+#include <OscPrintReceivedElements.h>
+
+#include "oscmsg.h"
 
 namespace osc {
 
-    class oscreceiver : public godot::GodotScript<godot::Node> {
+    class oscreceiver :
+    public godot::GodotScript<godot::Node>,
+    public osc::OscPacketListener {
         GODOT_CLASS(oscreceiver)
 
     public:
@@ -33,6 +48,8 @@ namespace osc {
         oscreceiver();
 
         virtual ~oscreceiver();
+
+        void max_queue(int max_queue);
 
         bool setup(unsigned int port);
 
@@ -45,6 +62,24 @@ namespace osc {
         int _port;
         bool _ready;
         bool _running;
+
+        // real processing stuff
+
+        std::mutex _lmutex;
+        std::thread _lthread;
+        UdpListeningReceiveSocket* _lsocket;
+
+        std::size_t _max_queue;
+
+        std::deque<oscmsg>* _gd_queue_write;
+        std::deque<oscmsg>* _gd_queue_read;
+
+        void ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint);
+
+        void create_buffers();
+        void purge_buffers();
+        void swap_buffers();
+        void check_queue();
 
     };
 

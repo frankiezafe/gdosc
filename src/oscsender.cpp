@@ -13,7 +13,7 @@
 
 #include "oscsender.h"
 
-using namespace godot;
+using namespace osc;
 
 void oscsender::_register_methods() {
     register_method("setup", &oscsender::setup);
@@ -37,18 +37,18 @@ oscsender::~oscsender() {
 
 }
 
-bool oscsender::setup(String ip, unsigned int port) {
+bool oscsender::setup(godot::String ip, unsigned int port) {
 
     std::wstring ws = ip.unicode_str();
     std::string s(ws.begin(), ws.end());
     unsigned int p = port;
 
     if (s.empty()) {
-        Godot::print("Invalid osc::oscsender setup: invalid ip");
+        godot::Godot::print("Invalid osc::oscsender setup: invalid ip");
         return false;
     }
     if (p <= 0) {
-        Godot::print("Invalid osc::oscsender setup: invalid port");
+        godot::Godot::print("Invalid osc::oscsender setup: invalid port");
         return false;
     }
 
@@ -60,7 +60,7 @@ bool oscsender::setup(String ip, unsigned int port) {
 
     _ip = s;
     _port = p;
-    _endpoint = ip + ":" + String::num(_port);
+    _endpoint = ip + ":" + godot::String::num(_port);
 
     _ready = true;
 
@@ -75,7 +75,7 @@ bool oscsender::setup(String ip, unsigned int port) {
 bool oscsender::start() {
 
     if (!_ready) {
-        Godot::print("oscsender::start, failed to start");
+        godot::Godot::print("oscsender::start, failed to start");
         return false;
 
     }
@@ -86,11 +86,11 @@ bool oscsender::start() {
 
         IpEndpointName _message_target = IpEndpointName(_ip.c_str(), _port);
         _socket = new UdpTransmitSocket(_message_target);
-        Godot::print("oscsender::start, started successfully on " + _endpoint);
+        godot::Godot::print("oscsender::start, started successfully on " + _endpoint);
 
     } catch (std::exception& e) {
 
-        Godot::print("oscsender::start, failed to start on " + _endpoint);
+        godot::Godot::print("oscsender::start, failed to start on " + _endpoint);
         //        std::cout << "scsender::stafailed to startrt, failed to starty" << e.what() << std::endl;
 
     }
@@ -108,7 +108,7 @@ void oscsender::stop() {
     if (_socket) {
         delete _socket;
         _socket = 0;
-        Godot::print("oscsender::stop, socket closed on " + _endpoint);
+        godot::Godot::print("oscsender::stop, socket closed on " + _endpoint);
     }
     _running = false;
 
@@ -145,7 +145,7 @@ void oscsender::msg(godot::String address) {
 void oscsender::add(godot::Variant var) {
 
     if (!_packet) {
-        Godot::print("oscsender::add, message is not ready! "
+        godot::Godot::print("oscsender::add, message is not ready! "
                 "call 'start_message' first!");
         return;
     }
@@ -212,7 +212,7 @@ void oscsender::add(godot::Variant var) {
         }
             break;
         default:
-            Godot::print("oscsender::add, unable to add "
+            godot::Godot::print("oscsender::add, unable to add "
                     "this kind of data!");
             break;
 
@@ -223,7 +223,7 @@ void oscsender::add(godot::Variant var) {
 void oscsender::send() {
 
     if (!_packet) {
-        Godot::print("oscsender::send, message is not ready! "
+        godot::Godot::print("oscsender::send, message is not ready! "
                 "call 'start_message' first!");
         return;
     }

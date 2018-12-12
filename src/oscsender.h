@@ -23,7 +23,7 @@
 #include <UdpSocket.h>
 #include <OscOutboundPacketStream.h>
 
-namespace godot {
+namespace osc {
 
     class oscsender : public godot::GodotScript<godot::Node> {
         GODOT_CLASS(oscsender)
@@ -48,12 +48,12 @@ namespace godot {
         
         void send();
 
-    private:
+    protected:
 
         std::string _ip;
         int _port;
         std::size_t _buffer_size;
-        String _endpoint;
+        godot::String _endpoint;
         bool _ready;
         bool _running;
         

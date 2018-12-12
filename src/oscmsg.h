@@ -56,16 +56,17 @@ namespace osc {
         inline int size() const {
             return _buffer_size;
         }
-        
-        inline void is_oscmsg() const {}
 
-    private:
+        inline void is_oscmsg() const {
+        }
+
+    protected:
 
         std::size_t _buffer_size;
         char* _buffer;
         osc::OutboundPacketStream* _packet;
         bool _packet_closed;
-        
+
         godot::PoolByteArray _array;
 
         void reset();
