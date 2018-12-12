@@ -18,9 +18,84 @@
 #include <Node.hpp>
 
 #include <OscTypes.h>
+#include <UdpSocket.h>
+#include <OscReceivedElements.h>
 #include <OscOutboundPacketStream.h>
 
 namespace osc {
+
+    class oscmsg_data {
+    public:
+
+        bool valid;
+        godot::String ip;
+        int port;
+        godot::String address;
+        godot::String typetag;
+        int arg_num;
+        godot::Array arguments;
+
+        oscmsg_data() : valid(false), port(0), arg_num(0) {
+        }
+
+        oscmsg_data(
+                const osc::ReceivedMessage& m,
+                const IpEndpointName& rep) {
+
+            address = godot::String(m.AddressPattern());
+            typetag = godot::String(m.TypeTags());
+            char endpointHost[IpEndpointName::ADDRESS_STRING_LENGTH];
+            rep.AddressAsString(endpointHost);
+            ip = godot::String(endpointHost);
+            port = rep.port;
+
+            try {
+
+                for (::osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin(); arg != m.ArgumentsEnd();
+                        ++arg) {
+                    if (arg->IsInt32()) {
+                        arguments.append(arg->AsInt32Unchecked());
+                    } else if (arg->IsFloat()) {
+                        arguments.append(arg->AsFloatUnchecked());
+                    } else if (arg->IsString()) {
+                        arguments.append(godot::String(arg->AsStringUnchecked()));
+                    } else if (arg->IsBool()) {
+                        arguments.append(arg->AsBool());
+                    }
+                }
+
+            } catch (osc::Exception& e) {
+                // any parsing errors such as unexpected argument types, or
+                // missing arguments get thrown as exceptions.
+                std::cout << "error while parsing message: " << m.AddressPattern() << ": " << e.what() << "\n";
+            }
+
+            arg_num = arguments.size();
+            valid = true;
+
+        }
+
+        oscmsg_data(const oscmsg_data& src) {
+            valid = src.valid;
+            ip = src.ip;
+            port = src.port;
+            address = src.address;
+            typetag = src.typetag;
+            arg_num = src.arg_num;
+            arguments = src.arguments;
+        }
+
+        inline void operator=(const oscmsg_data& src) {
+            valid = src.valid;
+            ip = src.ip;
+            port = src.port;
+            address = src.address;
+            typetag = src.typetag;
+            arg_num = src.arg_num;
+            arguments = src.arguments;
+        }
+
+    };
 
     class oscmsg : public godot::GodotScript<godot::Object> {
         GODOT_CLASS(oscmsg)

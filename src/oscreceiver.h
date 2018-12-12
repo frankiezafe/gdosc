@@ -29,8 +29,6 @@
 #include <UdpSocket.h>
 #include <PacketListener.h>
 #include <OscPacketListener.h>
-#include <OscReceivedElements.h>
-#include <OscPrintReceivedElements.h>
 
 #include "oscmsg.h"
 
@@ -71,10 +69,12 @@ namespace osc {
 
         std::size_t _max_queue;
 
-        std::deque<oscmsg>* _gd_queue_write;
-        std::deque<oscmsg>* _gd_queue_read;
+        std::deque<oscmsg_data>* _gd_queue_write;
+        std::deque<oscmsg_data>* _gd_queue_read;
 
-        void ProcessMessage(const osc::ReceivedMessage& m, const IpEndpointName& remoteEndpoint);
+        void ProcessMessage(
+                const osc::ReceivedMessage& m,
+                const IpEndpointName& remoteEndpoint);
 
         void create_buffers();
         void purge_buffers();

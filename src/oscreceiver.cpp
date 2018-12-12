@@ -35,9 +35,11 @@ oscreceiver::~oscreceiver() {
 }
 
 void oscreceiver::max_queue(int max_queue) {
+
     if (max_queue < 1) return;
     _max_queue = (std::size_t)max_queue;
     check_queue();
+
 }
 
 bool oscreceiver::setup(unsigned int port) {
@@ -133,14 +135,17 @@ void oscreceiver::stop() {
 
 void oscreceiver::create_buffers() {
 
+    _lmutex.lock();
     if (!_gd_queue_write) {
-        _gd_queue_write = new std::deque<oscmsg>();
-        _gd_queue_read = new std::deque<oscmsg>();
+        _gd_queue_write = new std::deque<oscmsg_data>();
+        _gd_queue_read = new std::deque<oscmsg_data>();
     }
+    _lmutex.unlock();
 
 }
 
 void oscreceiver::purge_buffers() {
+
     if (_gd_queue_write) {
         _gd_queue_write->clear();
         _gd_queue_read->clear();
@@ -149,29 +154,39 @@ void oscreceiver::purge_buffers() {
         _gd_queue_write = 0;
         _gd_queue_read = 0;
     }
+
 }
 
 void oscreceiver::swap_buffers() {
 
     _lmutex.lock();
-    std::deque<oscmsg>* tmp = _gd_queue_write;
+    std::deque<oscmsg_data>* tmp = _gd_queue_write;
     _gd_queue_write = _gd_queue_read;
     _gd_queue_read = tmp;
     _lmutex.unlock();
 
 }
 
-void oscreceiver::ProcessMessage(const osc::ReceivedMessage& m,
-        const IpEndpointName& remoteEndpoint) {
+void oscreceiver::ProcessMessage(
+        const osc::ReceivedMessage& m,
+        const IpEndpointName& rep) {
 
-
-
+    oscmsg_data msg( m, rep );
+    if (msg.valid) {
+      _lmutex.lock();
+      _gd_queue_write->push_back(msg);
+      check_queue();
+      _lmutex.unlock();
+    }
+    
 }
 
 void oscreceiver::check_queue() {
-    
+
+    _lmutex.lock();
     if (_gd_queue_write && _gd_queue_write->size() > _max_queue) {
         _gd_queue_write->resize(_max_queue);
     }
-    
+    _lmutex.unlock();
+
 }
