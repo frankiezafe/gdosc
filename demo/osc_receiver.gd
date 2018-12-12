@@ -15,5 +15,9 @@ func _process(delta):
 	
 	while( oscrcv.has_message() ):
 		var msg = oscrcv.get_next()
+		print( msg )
 	
 	pass
+	
+func _exit_tree ( ):
+	oscrcv.stop()
