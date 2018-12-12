@@ -27,7 +27,7 @@ void oscsender::_register_methods() {
 oscsender::oscsender() :
 _port(0), _buffer_size(1024),
 _ready(false), _running(false),
-_socket(0), _packet(0), _packet_closed(false) {
+_socket(0), _buffer(0), _packet(0), _packet_closed(false) {
 }
 
 oscsender::~oscsender() {
@@ -129,9 +129,9 @@ void oscsender::reset_message() {
 }
 
 void oscsender::msg(godot::String address) {
-
-    reset_message();
     
+    reset_message();
+        
     std::wstring ws = address.unicode_str();
     std::string std_address(ws.begin(), ws.end());
 
@@ -139,6 +139,7 @@ void oscsender::msg(godot::String address) {
     _packet = new osc::OutboundPacketStream(_buffer, _buffer_size);
     (*_packet) << osc::BeginBundleImmediate
             << osc::BeginMessage(std_address.c_str());
+    
 }
 
 void oscsender::add(godot::Variant var) {
