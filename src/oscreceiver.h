@@ -48,9 +48,11 @@ namespace osc {
         virtual ~oscreceiver();
 
         void max_queue(int max_queue);
+       
+        void avoid_duplicate( bool enabled );
 
         bool setup(unsigned int port);
-
+        
         bool start();
 
         void stop();
@@ -65,6 +67,7 @@ namespace osc {
         bool _ready;
         bool _running;
         bool _swap_needed;
+        bool _avoid_duplicate;
 
         // real processing stuff
 
@@ -74,8 +77,8 @@ namespace osc {
 
         std::size_t _max_queue;
 
-        std::deque<oscmsg_data>* _gd_queue_write;
-        std::deque<oscmsg_data>* _gd_queue_read;
+        std::deque<oscmsg_data>* _queue_write;
+        std::deque<oscmsg_data>* _queue_read;
         std::size_t _qread_index;
         std::size_t _qread_len;
         
@@ -87,6 +90,7 @@ namespace osc {
         void purge_buffers();
         void swap_buffers();
         void check_queue();
+        void purge_duplicates();
 
     };
 
