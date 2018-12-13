@@ -49,6 +49,17 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
 
 ## devlog
 
+### 2018/12/13
+
+#### done
+
+* compilation fixed
+* classes oscsender and oscreceiver ready to use
+
+#### todo
+
+* finish the oscmsg (osc message) class to prepare messages in gdscript instead
+
 ### 2018/10/25
 
 #### done
@@ -68,16 +79,15 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
 
 #### gdscript
 
-### 2018/12/13
+`receiver = load("res://bin/OSCreceiver.gdns").new()`
 
-#### done
+result:
 
-* compilation fixed
-* classes oscsender and oscreceiver ready to use
+	ERROR: poll: res://bin/OSCreceiver.gdns:9 - Parse Error: Can't load cached ext-resource #1
+	   At: scene/resources/scene_format_text.cpp:587.
 
-#### todo
-
-* finish the oscmsg (osc message) class to prepare messages in gdscript instead
+	ERROR: _load: Failed loading resource: res://bin/OSCreceiver.gdns
+	   At: core/io/resource_loader.cpp:192.
 
 ### 2018/10/25
 
