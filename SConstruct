@@ -11,9 +11,6 @@ ip_path = 'oscpack/ip/posix/'
 # This makes sure to keep the session environment variables on windows, 
 # that way you can run scons in a vs 2017 prompt and it will find all the required tools
 env = Environment()
-if platform == "windows":
-	env = Environment(ENV = os.environ)
-	ip_path = 'oscpack/ip/win32/'
 
 def add_sources(sources, directory):
 	for file in os.listdir(directory):
@@ -30,12 +27,15 @@ elif platform == "linux":
 	final_lib_path = final_lib_path + 'x11/'
 
 elif platform == "windows":
+
+	env = Environment(ENV = os.environ)
+	
 	if target == "debug":
 		env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '-MDd', '-DOSC_HOST_LITTLE_ENDIAN'])
 	else:
 		env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '-MD', '-DOSC_HOST_LITTLE_ENDIAN'])
 	
-	ip_path = 'oscpack/ip/win' + str(bits) + '/'
+	ip_path = 'oscpack/ip/win32/'
 	final_lib_path = final_lib_path + 'win' + str(bits) + '/'
 
 env.Append(CPPPATH=['.', 'src/', 'oscpack/', 'oscpack/osc/', 'oscpack/ip/', ip_path, "godot-cpp/godot_headers/", 'godot-cpp/include/', 'godot-cpp/include/core/'])
