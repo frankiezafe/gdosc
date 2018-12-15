@@ -27,20 +27,21 @@ elif platform == "linux":
 	final_lib_path = final_lib_path + 'x11/'
 
 elif platform == "windows":
-
 	env = Environment(ENV = os.environ)
-	
 	if target == "debug":
-		env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '-MDd', '-DOSC_HOST_LITTLE_ENDIAN'])
+		env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '/MDd', '-DOSC_HOST_LITTLE_ENDIAN'])
 	else:
-		env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '-MD', '-DOSC_HOST_LITTLE_ENDIAN'])
-	
+		env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '/MD', '-DOSC_HOST_LITTLE_ENDIAN'])
 	ip_path = 'oscpack/ip/win32/'
 	final_lib_path = final_lib_path + 'win' + str(bits) + '/'
 
 env.Append(CPPPATH=['.', 'src/', 'oscpack/', 'oscpack/osc/', 'oscpack/ip/', ip_path, "godot-cpp/godot_headers/", 'godot-cpp/include/', 'godot-cpp/include/core/'])
 env.Append(LIBPATH="godot-cpp/bin")
-env.Append(LIBS=["godot-cpp" + "." + platform + "." + str(bits)])
+
+if platform == "windows":
+	env.Append(LIBS=["godot-cpp" + "." + platform + "." + str(bits), "ws2_32", "wsock32", "winmm"])
+else:
+	env.Append(LIBS=["godot-cpp" + "." + platform + "." + str(bits)])
 
 sources = []
 add_sources(sources, "src")

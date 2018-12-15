@@ -53,11 +53,10 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
     git submodule init && git submodule update
     cd godot-cpp/
     git submodule init && git submodule update
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
     scons platform=windows headers_dir=godot_headers generate_bindings=yes
     cd ../
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\amd64\vcvars64.bat"
     scons platform=windows
+
 
 ## devlog
 
@@ -71,6 +70,37 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
 #### todo
 
 * finish the oscmsg (osc message) class to prepare messages in gdscript instead
+
+#### windows compilation
+
+ended with error in linker:
+
+    link /nologo /dll /out:demo\bin\win64\libgdosc.dll /implib:demo\bin\win64\libgdosc.lib /LIBPATH:godot-cpp\bin godot-cpp.windows.64.lib src\gdlibrary.obj src\oscmsg.obj src\oscreceiver.obj src\oscsender.obj oscpack\osc\OscOutboundPacketStream.obj oscpack\osc\OscPrintReceivedElements.obj oscpack\osc\OscReceivedElements.obj oscpack\osc\OscTypes.obj oscpack\ip\IpEndpointName.obj oscpack\ip\win32\NetworkingUtils.obj oscpack\ip\win32\UdpSocket.obj
+       Creating library demo\bin\win64\libgdosc.lib and object demo\bin\win64\libgdosc.exp
+    NetworkingUtils.obj : error LNK2019: unresolved external symbol __imp_ntohl referenced in function "unsigned long __cdecl GetHostByName(char const *)" (?GetHostByName@@YAKPEBD@Z)
+    UdpSocket.obj : error LNK2001: unresolved external symbol __imp_ntohl
+    NetworkingUtils.obj : error LNK2019: unresolved external symbol __imp_gethostbyname referenced in function "unsigned long __cdecl GetHostByName(char const *)" (?GetHostByName@@YAKPEBD@Z)
+    NetworkingUtils.obj : error LNK2019: unresolved external symbol __imp_WSAStartup referenced in function "public: __cdecl NetworkInitializer::NetworkInitializer(void)" (??0NetworkInitializer@@QEAA@XZ)
+    NetworkingUtils.obj : error LNK2019: unresolved external symbol __imp_WSACleanup referenced in function "public: __cdecl NetworkInitializer::~NetworkInitializer(void)" (??1NetworkInitializer@@QEAA@XZ)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_timeGetTime referenced in function "private: double __cdecl SocketReceiveMultiplexer::Implementation::GetCurrentTimeMs(void)const " (?GetCurrentTimeMs@Implementation@SocketReceiveMultiplexer@@AEBANXZ)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_bind referenced in function "public: void __cdecl UdpSocket::Implementation::Bind(class IpEndpointName const &)" (?Bind@Implementation@UdpSocket@@QEAAXAEBVIpEndpointName@@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_closesocket referenced in function "public: __cdecl UdpSocket::Implementation::~Implementation(void)" (??1Implementation@UdpSocket@@QEAA@XZ)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_connect referenced in function "public: void __cdecl UdpSocket::Implementation::Connect(class IpEndpointName const &)" (?Connect@Implementation@UdpSocket@@QEAAXAEBVIpEndpointName@@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_ioctlsocket referenced in function "public: void __cdecl SocketReceiveMultiplexer::Implementation::Run(void)" (?Run@Implementation@SocketReceiveMultiplexer@@QEAAXXZ)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_getsockname referenced in function "public: class IpEndpointName __cdecl UdpSocket::Implementation::LocalEndpointFor(class IpEndpointName const &)const " (?LocalEndpointFor@Implementation@UdpSocket@@QEBA?AVIpEndpointName@@AEBV3@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_htonl referenced in function "void __cdecl SockaddrFromIpEndpointName(struct sockaddr_in &,class IpEndpointName const &)" (?SockaddrFromIpEndpointName@@YAXAEAUsockaddr_in@@AEBVIpEndpointName@@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_htons referenced in function "void __cdecl SockaddrFromIpEndpointName(struct sockaddr_in &,class IpEndpointName const &)" (?SockaddrFromIpEndpointName@@YAXAEAUsockaddr_in@@AEBVIpEndpointName@@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_ntohs referenced in function "class IpEndpointName __cdecl IpEndpointNameFromSockaddr(struct sockaddr_in const &)" (?IpEndpointNameFromSockaddr@@YA?AVIpEndpointName@@AEBUsockaddr_in@@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_recvfrom referenced in function "public: unsigned __int64 __cdecl UdpSocket::Implementation::ReceiveFrom(class IpEndpointName &,char *,unsigned __int64)" (?ReceiveFrom@Implementation@UdpSocket@@QEAA_KAEAVIpEndpointName@@PEAD_K@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_send referenced in function "public: void __cdecl UdpSocket::Implementation::Send(char const *,unsigned __int64)" (?Send@Implementation@UdpSocket@@QEAAXPEBD_K@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_sendto referenced in function "public: void __cdecl UdpSocket::Implementation::SendTo(class IpEndpointName const &,char const *,unsigned __int64)" (?SendTo@Implementation@UdpSocket@@QEAAXAEBVIpEndpointName@@PEBD_K@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_setsockopt referenced in function "public: void __cdecl UdpSocket::Implementation::SetAllowReuse(bool)" (?SetAllowReuse@Implementation@UdpSocket@@QEAAX_N@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_socket referenced in function "public: __cdecl UdpSocket::Implementation::Implementation(void)" (??0Implementation@UdpSocket@@QEAA@XZ)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_WSAGetLastError referenced in function "public: class IpEndpointName __cdecl UdpSocket::Implementation::LocalEndpointFor(class IpEndpointName const &)const " (?LocalEndpointFor@Implementation@UdpSocket@@QEBA?AVIpEndpointName@@AEBV3@@Z)
+    UdpSocket.obj : error LNK2019: unresolved external symbol __imp_WSAEventSelect referenced in function "public: void __cdecl SocketReceiveMultiplexer::Implementation::Run(void)" (?Run@Implementation@SocketReceiveMultiplexer@@QEAAXXZ)
+    demo\bin\win64\libgdosc.dll : fatal error LNK1120: 20 unresolved externals
+    scons: *** [demo\bin\win64\libgdosc.dll] Error 1120
+    scons: building terminated because of errors.
 
 ### 2018/10/25
 
@@ -95,11 +125,11 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
 
 result:
 
-	ERROR: poll: res://bin/OSCreceiver.gdns:9 - Parse Error: Can't load cached ext-resource #1
-	   At: scene/resources/scene_format_text.cpp:587.
+    ERROR: poll: res://bin/OSCreceiver.gdns:9 - Parse Error: Can't load cached ext-resource #1
+       At: scene/resources/scene_format_text.cpp:587.
 
-	ERROR: _load: Failed loading resource: res://bin/OSCreceiver.gdns
-	   At: core/io/resource_loader.cpp:192.
+    ERROR: _load: Failed loading resource: res://bin/OSCreceiver.gdns
+       At: core/io/resource_loader.cpp:192.
 
 ### 2018/10/25
 

@@ -16,6 +16,8 @@ logs
 Thumbs.db
 demo/bin/x11/*
 demo/bin/windows/*
+demo/bin/win64/*
+demo/bin/win32/*
 demo/bin/osx/*
 tmp/*
 nbproject/*
