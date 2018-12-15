@@ -31,10 +31,11 @@ elif platform == "linux":
 
 elif platform == "windows":
 	if target == "debug":
-		env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '-MDd'])
+		env.Append(CCFLAGS = ['-EHsc', '-D_DEBUG', '-MDd', '-DOSC_HOST_LITTLE_ENDIAN'])
 	else:
-		env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '-MD'])
-
+		env.Append(CCFLAGS = ['-O2', '-EHsc', '-DNDEBUG', '-MD', '-DOSC_HOST_LITTLE_ENDIAN'])
+	
+	ip_path = 'oscpack/ip/win' + str(bits) + '/'
 	final_lib_path = final_lib_path + 'win' + str(bits) + '/'
 
 env.Append(CPPPATH=['.', 'src/', 'oscpack/', 'oscpack/osc/', 'oscpack/ip/', ip_path, "godot-cpp/godot_headers/", 'godot-cpp/include/', 'godot-cpp/include/core/'])
