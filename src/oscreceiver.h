@@ -25,11 +25,6 @@
 #include <Godot.hpp>
 #include <Node.hpp>
 
-#include <OscTypes.h>
-#include <UdpSocket.h>
-#include <PacketListener.h>
-#include <OscPacketListener.h>
-
 #include "oscmsg.h"
 
 namespace osc {

@@ -19,7 +19,9 @@
 
 #include <OscTypes.h>
 #include <UdpSocket.h>
+#include <PacketListener.h>
 #include <OscReceivedElements.h>
+#include <OscPacketListener.h>
 #include <OscOutboundPacketStream.h>
 
 namespace osc {

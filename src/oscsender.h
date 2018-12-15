@@ -16,12 +16,8 @@
 
 #include <Godot.hpp>
 #include <Node.hpp>
-#include <UdpSocket.h>
-#include <OscOutboundPacketStream.h>
 
-#include <OscTypes.h>
-#include <UdpSocket.h>
-#include <OscOutboundPacketStream.h>
+#include "oscmsg.h"
 
 namespace osc {
 
