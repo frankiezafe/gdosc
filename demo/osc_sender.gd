@@ -1,4 +1,4 @@
-extends Spatial
+extends Object
 
 var oscsndr
 var cube

@@ -1,4 +1,4 @@
-extends Spatial
+extends Object
 
 var oscrcv
 var cube

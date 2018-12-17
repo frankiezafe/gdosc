@@ -226,11 +226,13 @@ directional_shadow_max_distance = 200.0
 
 [node name="osc_sender" type="Spatial" parent="." index="3"]
 
+visible = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Matrix", "Pause", "Script", "Transform", "Visibility" ]
 
 [node name="osc_receiver" type="Spatial" parent="." index="4"]
 
+visible = false
 script = ExtResource( 2 )
 
 [node name="env" type="WorldEnvironment" parent="." index="5"]
