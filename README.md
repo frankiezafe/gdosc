@@ -35,7 +35,9 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
 
 ## compilation
 
-### no headache process (linux)
+### no headache process
+
+#### linux
 
     git clone https://gitlab.com/frankiezafe/gdnative_osc.git
     cd gdnative_template
@@ -46,7 +48,18 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
     cd ../
     scons platform=linux
 
-### no headache process (windows)
+#### osx
+
+    git clone https://gitlab.com/frankiezafe/gdnative_osc.git
+    cd gdnative_template
+    git submodule init && git submodule update
+    cd godot-cpp/
+    git submodule init && git submodule update
+    scons platform=linux headers_dir=godot_headers generate_bindings=yes
+    cd ../
+    scons platform=linux
+
+#### windows 10 64bits + vs 2017
 
     git clone https://gitlab.com/frankiezafe/gdnative_osc.git
     cd gdnative_template
@@ -57,6 +70,7 @@ This addon is based on the cross-platorm OSC lib [oscpack](http://www.rossbencin
     cd ../
     scons platform=windows
 
+for other windows / vs version, refer to https://gitlab.com/frankiezafe/gdnative_template
 
 ## devlog
 
