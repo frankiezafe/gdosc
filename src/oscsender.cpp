@@ -1,13 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscsender.cpp
  * Author: frankiezafe
- * 
+ *
  * Created on December 10, 2018, 1:21 PM
  */
 
@@ -129,9 +127,9 @@ void oscsender::reset_message() {
 }
 
 void oscsender::msg(godot::String address) {
-    
+
     reset_message();
-        
+
     std::wstring ws = address.unicode_str();
     std::string std_address(ws.begin(), ws.end());
 
@@ -139,7 +137,7 @@ void oscsender::msg(godot::String address) {
     _packet = new osc::OutboundPacketStream(_buffer, _buffer_size);
     (*_packet) << osc::BeginBundleImmediate
             << osc::BeginMessage(std_address.c_str());
-    
+
 }
 
 void oscsender::add(godot::Variant var) {

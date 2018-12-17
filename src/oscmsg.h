@@ -1,10 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscmsg.h
  * Author: frankiezafe
  *
@@ -145,4 +143,3 @@ namespace osc {
 };
 
 #endif /* OSCMSG_H */
-

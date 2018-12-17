@@ -1,13 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscreceiver.cpp
  * Author: frankiezafe
- * 
+ *
  * Created on December 10, 2018, 5:41 PM
  */
 
@@ -222,7 +220,7 @@ void oscreceiver::check_queue() {
 }
 
 void oscreceiver::purge_duplicates() {
-    
+
     if ( _queue_read->size() < 2 ) {
         return;
     }
@@ -244,7 +242,7 @@ void oscreceiver::purge_duplicates() {
     for (; mi != mie; ++mi) {
         _queue_read->push_back(mi->second);
     }
-    
+
     // updating the indices
     _qread_index = 0;
     _qread_len = _queue_read->size();

@@ -1,13 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscmsg.cpp
  * Author: frankiezafe
- * 
+ *
  * Created on December 10, 2018, 5:52 PM
  */
 
@@ -31,10 +29,10 @@ oscmsg::oscmsg() :
 _buffer_size(1024),
 _buffer(0), _packet(0),
 _packet_closed(false) {
-    
+
     std::cout << this << std::endl;
     std::cout << this->owner << std::endl;
-    
+
 }
 
 oscmsg::~oscmsg() {
@@ -78,7 +76,7 @@ void oscmsg::address(godot::String address) {
     _packet = new osc::OutboundPacketStream(_buffer, _buffer_size);
     (*_packet) << osc::BeginBundleImmediate
             << osc::BeginMessage(std_address.c_str());
-    
+
 }
 
 void oscmsg::add(godot::Variant var) {
@@ -162,16 +160,16 @@ void oscmsg::add(godot::Variant var) {
 void oscmsg::close() {
 
     if (!_packet_closed) {
-        
+
         (*_packet) << osc::EndMessage << osc::EndBundle;
-        
+
         _array.resize(0);
         for ( std::size_t i = 0; i < _buffer_size; ++i ) {
             _array.push_back( (unsigned char) _packet->Data()[i] );
         }
-        
+
         _packet_closed = true;
-        
+
     }
 
 }
