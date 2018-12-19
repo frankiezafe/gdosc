@@ -1,10 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscsender.h
  * Author: frankiezafe
  *
@@ -29,7 +27,7 @@ namespace osc {
         static void _register_methods();
 
         oscsender();
-        
+
         virtual ~oscsender();
 
         bool setup(godot::String ip, unsigned int port);
@@ -37,11 +35,11 @@ namespace osc {
         bool start();
 
         void stop();
-        
+
         void msg( godot::String address );
-        
+
         void add( godot::Variant var );
-        
+
         void send();
 
     protected:
@@ -52,17 +50,16 @@ namespace osc {
         godot::String _endpoint;
         bool _ready;
         bool _running;
-        
+
         UdpTransmitSocket* _socket;
-        
+
         char* _buffer;
         osc::OutboundPacketStream* _packet;
         bool _packet_closed;
-        
+
         void reset_message();
 
     };
 };
 
 #endif /* OSCSENDER_H */
-

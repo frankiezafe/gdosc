@@ -1,10 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * See the LICENSE file at the root directory for license information
  */
 
-/* 
+/*
  * File:   oscreceiver.h
  * Author: frankiezafe
  *
@@ -43,17 +41,17 @@ namespace osc {
         virtual ~oscreceiver();
 
         void max_queue(int max_queue);
-       
+
         void avoid_duplicate( bool enabled );
 
         bool setup(unsigned int port);
-        
+
         bool start();
 
         void stop();
-        
+
         bool has_message();
-        
+
         godot::Dictionary get_next();
 
     protected:
@@ -76,7 +74,7 @@ namespace osc {
         std::deque<oscmsg_data>* _queue_read;
         std::size_t _qread_index;
         std::size_t _qread_len;
-        
+
         void ProcessMessage(
                 const osc::ReceivedMessage& m,
                 const IpEndpointName& remoteEndpoint);
@@ -92,4 +90,3 @@ namespace osc {
 };
 
 #endif /* OSCRECEIVER_H */
-
