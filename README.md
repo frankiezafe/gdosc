@@ -40,8 +40,8 @@ contains the sources of the library
 #### linux
 
 ``` bash
-    git clone https://gitlab.com/frankiezafe/gdnative_osc.git
-    cd gdnative_osc
+    git clone https://gitlab.com/frankiezafe/gdosc.git
+    cd gdosc
     git submodule init && git submodule update
     cd godot-cpp/
     git submodule init && git submodule update
@@ -52,24 +52,26 @@ contains the sources of the library
 
 #### osx
 
-    git clone https://gitlab.com/frankiezafe/gdnative_osc.git
-    cd gdnative_osc
+``` git clone https://gitlab.com/frankiezafe/gdosc.git
+    cd gdosc
     git submodule init && git submodule update
     cd godot-cpp/
     git submodule init && git submodule update
     scons platform=linux headers_dir=godot_headers generate_bindings=yes
     cd ../
     scons platform=linux
+```
 
 #### windows 10 64bits + vs 2017
 
-    git clone https://gitlab.com/frankiezafe/gdnative_osc.git
-    cd gdnative_osc
+``` git clone https://gitlab.com/frankiezafe/gdosc.git
+    cd gdosc
     git submodule init && git submodule update
     cd godot-cpp/
     git submodule init && git submodule update
     scons platform=windows headers_dir=godot_headers generate_bindings=yes
     cd ../
     scons platform=windows
+```
 
 for other windows / vs version, refer to https://gitlab.com/frankiezafe/gdnative_template
