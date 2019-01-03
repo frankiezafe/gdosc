@@ -4,7 +4,7 @@ var oscrcv
 
 func _ready():
 	
-	oscrcv = load("res://bin/gdoscreceiver.gdns").new()
+	oscrcv = load("res://addons/gdosc/bin/gdoscreceiver.gdns").new()
 	# [optional] maximum number of messages in the buffer, default is 100
 	oscrcv.max_queue( 20 )
 	# [optional]  receiver will only keeps the "latest" message for each address

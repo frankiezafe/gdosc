@@ -4,7 +4,7 @@ var oscsndr
 
 func _ready():
 	
-	oscsndr = load("res://bin/gdoscsender.gdns").new()
+	oscsndr = load("res://addons/gdosc/bin/gdoscsender.gdns").new()
 	# [mandatory] will send messages to ip:port
 	oscsndr.setup( "127.0.0.1", 12000 )
 	# [mandatory] enabling emission

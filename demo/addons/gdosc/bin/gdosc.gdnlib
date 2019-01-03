@@ -1,0 +1,18 @@
+[general]
+
+singleton=false
+load_once=true
+symbol_prefix="godot_"
+reloadable=true
+
+[entry]
+
+X11.64="res://addons/gdosc/bin/x11/libgdosc.so"
+Windows.64="res://addons/gdosc/bin/win64/libgdosc.dll"
+OSX.64="res://addons/gdosc/bin/osx/libgdosc.dylib"
+
+[dependencies]
+
+X11.64=[  ]
+Windows.64=[  ]
+OSX.64=[  ]

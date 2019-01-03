@@ -6,7 +6,7 @@ var cube
 func _ready():
 	
 	cube = get_node( "../cube" )
-	oscsndr = load("res://bin/gdoscsender.gdns").new()
+	oscsndr = load("res://addons/gdosc/bin/gdoscsender.gdns").new()
 	oscsndr.setup( "127.0.0.1", 12000 )		# will send messages to ip:port
 	oscsndr.start()							# enabling emission
 

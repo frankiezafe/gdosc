@@ -5,7 +5,7 @@ target = ARGUMENTS.get("target", "debug")
 platform = ARGUMENTS.get("platform", "windows")
 bits = ARGUMENTS.get("bits", 64)
 
-final_lib_path = 'demo/bin/'
+final_lib_path = 'demo/addons/gdosc/bin/'
 ip_path = 'oscpack/ip/posix/'
 
 # This makes sure to keep the session environment variables on windows, 
