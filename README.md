@@ -9,6 +9,20 @@ The code will compile into a dynamic library, easy to load and use in godot proj
 * GDnative version of https://github.com/djiamnot/gdosc.
 * based on https://gitlab.com/frankiezafe/gdnative_template
 
+## downloads
+
+- **version 0.1.1**, (not release yet)
+-- updated puredata patches
+-- file loggin functionality in osc_receiver
+-- reorganisation of the folder structure
+
+- **version 0.1.0**, 2018-12-17 - **[download](https://gitlab.com/frankiezafe/gdosc/blob/master/release/gdnative_osc_v0.1.0.zip)**
+-- osc_sender and osc_receiver classes ready to use
+-- compilation for linux, windows and osx
+
+- tmp/
+-- archives containing partial releases
+
 ## about OSC
 
 Open Sound Control (OSC) is a network protocol commonly used in digital arts, stage and live multimedia performances to exchange information between softwares. Based on UDP protocol, it ensures fast communication and nearly no knowledge about network management.
@@ -28,6 +42,10 @@ library is located in demo/bin/, once the project compiled
 ### demo-pd/
 
 contains a simple [puredata](http://puredata.info/) patch that emits OSC messages
+
+### release/
+
+contains downloadable ready-to-ue gdosc module
 
 ### src/
 
@@ -57,9 +75,9 @@ contains the sources of the library
     git submodule init && git submodule update
     cd godot-cpp/
     git submodule init && git submodule update
-    scons platform=linux headers_dir=godot_headers generate_bindings=yes
+    scons platform=osx headers_dir=godot_headers generate_bindings=yes
     cd ../
-    scons platform=linux
+    scons platform=osx
 ```
 
 #### windows 10 64bits + vs 2017
@@ -74,7 +92,7 @@ contains the sources of the library
     scons platform=windows
 ```
 
-for other windows / vs version, refer to https://gitlab.com/frankiezafe/gdnative_template
+for other windows / visual studio version, refer to [gdnative_template](https://gitlab.com/frankiezafe/gdnative_template/blob/master/README.md)
 
 ## contributors
 
