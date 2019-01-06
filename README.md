@@ -11,17 +11,16 @@ The code will compile into a dynamic library, easy to load and use in godot proj
 
 ## downloads
 
-- **version 0.1.1**, (not release yet)
--- updated puredata patches
--- file loggin functionality in osc_receiver
--- reorganisation of the folder structure
+### **version 0.1.1**, (not release yet)
 
-- **version 0.1.0**, 2018-12-17 - **[download](https://gitlab.com/frankiezafe/gdosc/blob/master/release/gdnative_osc_v0.1.0.zip)**
--- osc_sender and osc_receiver classes ready to use
--- compilation for linux, windows and osx
+- updated puredata patches
+- file loggin functionality in osc_receiver
+- reorganisation of the folder structure
 
-- tmp/
--- archives containing partial releases
+### **version 0.1.0**, 2018-12-17 - **[download](https://gitlab.com/frankiezafe/gdosc/blob/master/release/gdnative_osc_v0.1.0.zip)**
+
+- osc_sender and osc_receiver classes ready to use
+- compilation for linux, windows and osx
 
 ## about OSC
 
@@ -46,6 +45,10 @@ contains a simple [puredata](http://puredata.info/) patch that emits OSC message
 ### release/
 
 contains downloadable ready-to-ue gdosc module
+
+#### tmp
+
+archives containing partial releases
 
 ### src/
 
