@@ -75,3 +75,9 @@ contains the sources of the library
 ```
 
 for other windows / vs version, refer to https://gitlab.com/frankiezafe/gdnative_template
+
+## contributors
+
+- François Zajéga [frankiezafe](https://gitlab.com/frankiezafe/)
+- Michal Seta - [djiamnot](https://gitlab.com/djiamnot/)
+- Bastiaan Olij - [mux213@gmail.com](mux213@gmail.com) - special thanks for dgnative c++ template!
